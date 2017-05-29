@@ -1,0 +1,185 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:b="http://bootsfaces.net/ui">
+
+    <body>
+
+        <ui:composition template="./../../plantillas/mpAdmin.xhtml">
+
+            <ui:define name="content">
+                <!--Aca ira todo el contenido-->
+                <b:container>
+                    <b:panel collapsible="false" look="primary" 
+                             style="text-align: center;border-color: black;">
+                        <f:facet name="heading">
+                            <h4>Gestión de Productos</h4>
+                        </f:facet>
+                        <b:column col-lg="12" >
+                            <br/>
+                            <b:column col-md="4"></b:column >
+                            <b:column col-md="4" style="padding-left:55px">
+                                <h:commandButton class="form-control" value="Registrar Producto" onclick="$('#modalRegistrar').modal('show');" style="background-color:#D2D4D6;color: black;border-color: black" immediate="true" />
+
+                            </b:column >
+
+                            <br/><br/><br/>
+                            <b:panel look="primary" collapsible="false" style="border-color: black;text-align: center">
+                                <f:facet name="heading">
+                                    <h4>Productos Registrados</h4>
+                                </f:facet>
+                                <h:form id="frmMostrar">
+                                    <b:dataTable value="#{productoController.productos}" var="prod" responsive="true" widgetVar="dtU" style="text-align: center">
+                                        <b:dataTableColumn label="Producto" value="#{prod.producto}" style="text-align: center"/>
+                                        <b:dataTableColumn label="Cantidad Actual" value="#{prod.stockActual}" style="text-align: center"/>
+                                        <b:dataTableColumn label="Unidad de Medida" value="#{prod.unidadMedida}" style="text-align: center"/>
+                                        <b:dataTableColumn label="Cantidad Mínima" value="#{prod.stockMinimo}" style="text-align: center"/>                                              
+                                        <b:dataTableColumn label="Modificar" style="text-align: center;">
+
+                                            <p:commandButton  icon="ui-icon-pencil" onclick="$('#modalModificar').modal('show');" update="frmModificar" immediate="true" >
+                                                <f:setPropertyActionListener target="#{productoController.producto}" value="#{prod}" />
+                                            </p:commandButton>
+
+                                        </b:dataTableColumn>
+                                    </b:dataTable>
+                                </h:form>
+                            </b:panel>
+                        </b:column>
+                    </b:panel>
+                </b:container>
+
+
+
+                <b:modal id="modalRegistrar" title="Registro de Productos" style="text-align: center" styleClass="modalPseudoClass" size="modal-lg" >
+                    <p:growl id="growlR" autoUpdate="false" severity="info, fatal" showSummary="true" showDetail="true"/>
+                    <h:form id="frmCrear">
+
+                        <b:row>
+                            <div class="col-lg-12" align="center">
+                                <b:panel look="primary" collapsible="false" style="width: 75%;border-color: black;text-align: center">
+                                    <f:facet name="heading">
+                                        <h4>Datos del Producto</h4>
+                                    </f:facet>
+                                    <div class="panel-body" align="center">
+                                        <h:panelGrid id="grid" columns="3" cellpadding="5" style="text-align:  center">
+
+                                            <p:outputLabel for="nombreP" value="Nombre del producto" />
+
+                                            <p:inputText id="nombreP" class="form-control" value="#{productoController.producto.producto}" required="true" requiredMessage="Campo Requerido"/> 
+
+                                            <p:message for="nombreP" style="padding-left: 10px;"/>
+
+                                            <p:outputLabel/><p:outputLabel/><p:outputLabel/>
+
+                                            <p:outputLabel for="cboMedida" value="Unidad de Medidad"/> 
+                                            <h:selectOneMenu class="form-control" id="cboMedida" value="#{productoController.producto.unidadMedida}"  required="true" >
+                                                <f:selectItem itemLabel="----Seleccione----" noSelectionOption="true"/>
+                                                <f:selectItem itemValue="Libras" itemLabel="Libras"/>
+                                                <f:selectItem itemValue="Kilogramos" itemLabel="Kilogramos"/>
+                                            </h:selectOneMenu>
+                                            <p:message for="cboMedida"/>
+
+                                            <p:outputLabel/><p:outputLabel/><p:outputLabel/>
+
+                                            <p:outputLabel for="stockM" value="Cantidad mínima:"/>
+
+                                            <p:inputText id="stockM" class="form-control" value="#{productoController.producto.stockMinimo}" required="true" requiredMessage="Campo Requerido"/> 
+
+                                            <p:message for="stockM" style="padding-left: 10px;"/>
+
+                                            <p:outputLabel/><p:outputLabel/><p:outputLabel/>    
+
+                                        </h:panelGrid>
+                                    </div>
+                                </b:panel><!--Aqui termina el primer panel-->
+
+                                <b:column col-md="5"></b:column>
+                                <b:column col-md="3">
+
+                                    <b:commandButton id="btnRegistrarP" update=":frmMostrar,grid,growlR" actionListener="#{productoController.registrar()}" value="Registrar" class="form-control" 
+                                                     style="background-color:#D2D4D6;color: black;border-color: black;width:80%" 
+                                                     action="ProductosAdm.xhtml?faces-redirect=true"/>
+                                </b:column>
+                            </div>
+                            <b:column col-lg="2"></b:column>
+                        </b:row>
+
+                    </h:form>
+                    <f:facet name="footer">
+                        <b:button value="Cerrar" dismiss="modal" />
+                    </f:facet>
+                </b:modal>
+
+
+                <b:modal id="modalModificar" title="Modificar Producto" styleClass="modalPseudoClass" style="text-align: center" size="modal-lg">
+                    <p:growl id="growlM" autoUpdate="false" severity="info, fatal" showSummary="true" showDetail="true"/>
+                    <h:form id="frmModificar">
+
+                        <b:row>
+                            <div class="col-lg-12" align="center">
+                                <b:panel look="primary" collapsible="false" style="width: 75%;border-color: black;text-align: center">
+                                    <f:facet name="heading">
+                                        <h4>Datos del Producto</h4>
+                                    </f:facet>
+                                    <div class="panel-body" align="center" >
+                                        <h:panelGrid id="grid" columns="3" cellpadding="5" style="text-align:  center">
+
+                                            <p:outputLabel for="nombreP" value="Nombre del producto" />
+
+                                            <p:inputText id="nombreP" class="form-control" value="#{productoController.producto.producto}" required="true" requiredMessage="Campo Requerido"/> 
+
+                                            <p:message for="nombreP" style="padding-left: 10px;"/>
+
+                                            <p:outputLabel/><p:outputLabel/><p:outputLabel/>
+
+                                            <p:outputLabel for="cboMedida"  value="Unidad de Medidad"/> 
+                                            <h:selectOneMenu id="cboMedida" class="form-control" value="#{productoController.producto.unidadMedida}"  required="true" >
+                                                <f:selectItem itemLabel="----Seleccione----" noSelectionOption="true"/>
+                                                <f:selectItem itemValue="Libras" itemLabel="Libras"/>
+                                                <f:selectItem itemValue="Kilogramos" itemLabel="Kilogramos"/>
+                                            </h:selectOneMenu>
+                                            <p:message for="cboMedida"/>
+
+                                            <p:outputLabel/><p:outputLabel/><p:outputLabel/>
+
+                                            <p:outputLabel for="stockM" value="Cantidad mínima:"/>
+
+                                            <p:inputText id="stockM" class="form-control" value="#{productoController.producto.stockMinimo}" required="true" requiredMessage="Campo Requerido"/> 
+
+                                            <p:message for="stockM" style="padding-left: 10px;"/>
+
+                                            <p:outputLabel/><p:outputLabel/><p:outputLabel/>    
+
+                                        </h:panelGrid>
+                                    </div>
+                                </b:panel><!--Aqui termina el primer panel-->
+
+                                <b:column col-md="5"></b:column>
+                                <b:column col-md="3">
+
+                                    <b:commandButton id="btnModificarP" update=":frmMostrar,grid,growlM" actionListener="#{productoController.modificar()}" value="Modificar" class="form-control" 
+                                                     style="background-color:#D2D4D6;color: black;border-color: black;width:80%" 
+                                                     action="ProductosAdm.xhtml?faces-redirect=true"/>
+                                </b:column>
+                            </div>
+                            <b:column col-lg="2"></b:column>
+                        </b:row>
+
+                    </h:form>
+                    <f:facet name="footer">
+                        <b:button value="Cerrar" dismiss="modal" />
+                    </f:facet>
+                </b:modal>
+
+
+
+            </ui:define>
+
+        </ui:composition>
+
+    </body>
+</html>
