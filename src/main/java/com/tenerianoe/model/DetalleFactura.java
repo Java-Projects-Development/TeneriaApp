@@ -32,10 +32,7 @@ public class DetalleFactura implements Serializable {
     private Factura idFactura;
     @JoinColumn(name = "idCatalogoProducto", referencedColumnName = "idCatalogoProducto")
     @ManyToOne
-    private CatalogoProducto idCatalogoProducto;
-    @JoinColumn(name = "idCatalogoProveedor", referencedColumnName = "idCatalogoProveedor")
-    @ManyToOne
-    private CatalogoProveedor idCatalogoProveedor;
+    private catalogo_producto idCatalogoProducto;
     @Column(name = "cantidad")
     private Double cantidad;
     @Column(name = "precioUnitario")
@@ -46,10 +43,9 @@ public class DetalleFactura implements Serializable {
     public DetalleFactura() {
     }
 
-    public DetalleFactura( Factura idFactura, CatalogoProducto idCatalogoProducto, CatalogoProveedor idCatalogoProveedor, Double cantidad, BigDecimal precioUnitario, BigDecimal totalCompra) {
+    public DetalleFactura( Factura idFactura, catalogo_producto idCatalogoProducto,Double cantidad, BigDecimal precioUnitario, BigDecimal totalCompra) {
         this.idFactura = idFactura;
         this.idCatalogoProducto = idCatalogoProducto;
-        this.idCatalogoProveedor = idCatalogoProveedor;
         this.cantidad = cantidad;
         this.precioUnitario = precioUnitario;
         this.totalCompra = totalCompra;
@@ -97,20 +93,13 @@ public class DetalleFactura implements Serializable {
         this.idFactura = idFactura;
     }
 
-    public CatalogoProducto getIdCatalogoProducto() {
+    public catalogo_producto getIdCatalogoProducto() {
         return idCatalogoProducto;
     }
 
-    public void setIdCatalogoProducto(CatalogoProducto idCatalogoProducto) {
+    public void setIdCatalogoProducto(catalogo_producto idCatalogoProducto) {
         this.idCatalogoProducto = idCatalogoProducto;
     }
 
-    public CatalogoProveedor getIdCatalogoProveedor() {
-        return idCatalogoProveedor;
-    }
-
-    public void setIdCatalogoProveedor(CatalogoProveedor idCatalogoProveedor) {
-        this.idCatalogoProveedor = idCatalogoProveedor;
-    }
 
 }

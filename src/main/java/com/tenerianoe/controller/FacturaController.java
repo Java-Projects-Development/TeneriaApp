@@ -9,7 +9,7 @@ import com.tenerianoe.ejb.CatalogoProductoFacadeLocal;
 import com.tenerianoe.ejb.CatalogoProveedorFacadeLocal;
 import com.tenerianoe.ejb.DetalleFacturaFacade;
 import com.tenerianoe.ejb.FacturaFacadeLocal;
-import com.tenerianoe.model.CatalogoProducto;
+import com.tenerianoe.model.catalogo_producto;
 import com.tenerianoe.model.CatalogoProveedor;
 import com.tenerianoe.model.DetalleFactura;
 import com.tenerianoe.model.Factura;
@@ -34,7 +34,7 @@ public class FacturaController {
 
       //Objetos 
       private CatalogoProveedor proveedorSeleccionado;
-      private CatalogoProducto productoSeleccionado;
+      private catalogo_producto productoSeleccionado;
       private Factura factura;
       private DetalleFactura detalleFactura;
 
@@ -56,7 +56,7 @@ public class FacturaController {
       public void init() {
 
             proveedorSeleccionado = new CatalogoProveedor();
-            productoSeleccionado = new CatalogoProducto();
+            productoSeleccionado = new catalogo_producto();
             factura = new Factura();
             proveedores = proveedorEJB.findAll();
             listaDetalleFactura = new ArrayList<>();
@@ -70,7 +70,7 @@ public class FacturaController {
       }
 
       public void obtenerProductoSeleccionado(SelectEvent event) {
-            productoSeleccionado = ((CatalogoProducto) event.getObject());
+            productoSeleccionado = ((catalogo_producto) event.getObject());
 
       }
 
@@ -82,7 +82,7 @@ public class FacturaController {
                   } else {
 
                         this.detalleFactura = new DetalleFactura();
-                        this.productoSeleccionado = new CatalogoProducto();
+                        this.productoSeleccionado = new catalogo_producto();
                         //Calcula total de la venta
                         calcularTotalFacturaCompra();
                   }
@@ -122,7 +122,7 @@ public class FacturaController {
             this.proveedorSeleccionado = new CatalogoProveedor();
             this.factura = new Factura();
             this.listaDetalleFactura = new ArrayList<>();
-            this.productoSeleccionado = new CatalogoProducto();
+            this.productoSeleccionado = new catalogo_producto();
       }
 
       //Getter y setters
@@ -134,11 +134,11 @@ public class FacturaController {
             this.proveedorSeleccionado = proveedorSeleccionado;
       }
 
-      public CatalogoProducto getProductoSeleccionado() {
+      public catalogo_producto getProductoSeleccionado() {
             return productoSeleccionado;
       }
 
-      public void setProductoSeleccionado(CatalogoProducto productoSeleccionado) {
+      public void setProductoSeleccionado(catalogo_producto productoSeleccionado) {
             this.productoSeleccionado = productoSeleccionado;
       }
 

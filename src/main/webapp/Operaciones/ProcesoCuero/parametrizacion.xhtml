@@ -4,7 +4,8 @@
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:p="http://primefaces.org/ui"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:f="http://xmlns.jcp.org/jsf/core">
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
 
     <body>            
 
@@ -14,125 +15,287 @@
 
             <ui:define name="content">
 
-                <h4>Parametrizacion de Elaboracion de Cuero</h4>
-                                <p:separator/>
+                <br/>
+                <br/>
 
                 <h:form>
                     <p:panel header="Parametrizacion de Proceso de Elaboracion de Cuero"
                              style="width: 1000px;margin: 0 auto; text-align:center ">
 
-                        <p:layout style="width: 100%; height: 450px" >
+                        <p:layout style="width: 15  100%; height: 550px" >
                             <p:layoutUnit id="datosEntrada" position="center" 
                                           style="padding: 5px; text-align: justify;font-size: 14px;
                                           width: 5%" 
                                           size="100" >
 
-                                <p:panel header="Etapa de Produccion">
-                                    <p:panelGrid columns="3" layout="grid" style=" text-align:center">
-                                        <p:outputLabel value="Seleccione Etapa" />
-                                        <p:selectOneMenu style="width: 300px">
-                                            <f:selectItem noSelectionOption="true" itemLabel="---Selecione----"/>
-                                            <f:selectItem itemLabel="Etapa 1: Remojo " itemValue="c"/>  
-                                            <f:selectItem itemLabel="Etapa 2: Pelambre " itemValue="c"/>
-                                            <f:selectItem itemLabel="Etapa 3: Desencalado " itemValue="c"/>  
-                                            <f:selectItem itemLabel="Etapa 4: Piquelado " itemValue="c"/>  
-                                            <f:selectItem itemLabel="Etapa 5: Curtido " itemValue="c"/>
-                                            <f:selectItem itemLabel="Etapa 6: Engrase " itemValue="c"/>  
-                                        </p:selectOneMenu>
-                                    </p:panelGrid>
-                                </p:panel>
+                                <p:panel header="Informacion de procesos">
 
-                                <p:separator/>
-                                <p:panel header="Productos por Etapa de Produccion">
-                                    <p:wizard backLabel="Regresar" nextLabel="Siguiente ">
-                                        <p:tab id="tabProductos" title="Seleccion de Productos">
-                                            <p:panel header="Personal Details">
-                                                <h:panelGrid columns="2" columnClasses="label, value">
-                                                    <h:outputText value="Producto 1" />
-                                                    <p:selectOneMenu style=" width: 150px">
-                                                        <f:selectItem itemLabel="Bisulfito" itemValue="c"/>  
-                                                    </p:selectOneMenu>
-                                                    <h:outputText value="Producto 2" />
-                                                    <p:selectOneMenu style=" width: 150px">
-                                                        <f:selectItem itemLabel="Cloruro de Potasio" itemValue="c"/>  
-                                                    </p:selectOneMenu>                                                    <h:outputText value="Producto 3" />
-                                                     <p:selectOneMenu style=" width: 150px">
-                                                        <f:selectItem itemLabel="Bromuro" itemValue="c"/>  
-                                                    </p:selectOneMenu>
+                                    <p:panel header="Etapa 1: Remojo "  >
+                                        <p:panelGrid columns="4"  layout="grid">
 
-                                                    <h:outputText value="Producto 4" />
-                                                    <p:selectOneMenu style=" width: 150px">
-                                                        <f:selectItem itemLabel="Desengrasador" itemValue="c"/>  
-                                                    </p:selectOneMenu>
-                                                </h:panelGrid>
-                                            </p:panel>
-                                        </p:tab>
+                                            <h:outputText value="Producto 1" />
+                                            <p:selectOneMenu style=" width: 150px" value="#{parametrizacionController.listaProductos}">
+                                                <f:selectItems value="#{parametrizacionController.listaProductos}" itemLabel="#{prod1.producto}" var="prod1" itemValue="#{prod1}"/>  
+                                            </p:selectOneMenu>                                          
+                                            <p:outputLabel value="Porcentaje"/>
+                                            <p:inputNumber/>
 
-                                        <p:tab id="tabPorcentaje" title="Asignacion de Porcentajes">
-                                            <p:panel header="Personal Details">
-                                                <h:panelGrid columns="2" columnClasses="label, value">
-                                                    <h:outputText value="Producto 1" />
-                                                    <p:inputNumber value="30" symbol="%" symbolPosition="right" style=" width: 150px"/>
-
-                                                    <h:outputText value="Producto 2" />
-                                                    <p:inputNumber value="10" symbol="%" symbolPosition="right" style=" width: 150px"/>
-                                                    <h:outputText value="Producto 3" />
-                                                    <p:inputNumber value="15" symbol="%" symbolPosition="right" style=" width: 150px"/>
-
-                                                    <h:outputText value="Producto 4" />
-                                                    <p:inputNumber value="5" symbol="%" symbolPosition="right" style=" width: 150px"/>
-                                                </h:panelGrid>
-                                            </p:panel>
-                                        </p:tab>
-
-                                        <p:tab id="confirm" title="Confirmacion de Parametros">
-                                            <p:panel header="Confirmación">
-                                                <h:panelGrid id="confirmation" columns="3" columnClasses="grid,grid,grid">
-                                                    <h:panelGrid columns="2" columnClasses="label, value">
-                                                        <h:outputText value="Bisulfito " />
-                                                        <h:outputText value="30%" styleClass="outputLabel"/>
-
-                                                        <h:outputText value="Cloruro de Potasio" />
-                                                        <h:outputText value="10%" styleClass="outputLabel"/>
-
-                                                        <h:outputText value="Bromuro" />
-                                                        <h:outputText value="15%" styleClass="outputLabel"/>
-
-                                                        <h:outputText value="Desengrasador" />
-                                                        <h:outputText value="5%"/>
-                                                    </h:panelGrid>
+                                            <h:outputText value="Producto 2" />
+                                            <p:selectOneMenu style=" width: 150px" value="#{parametrizacionController.listaProductos}">
+                                                <f:selectItems value="#{parametrizacionController.listaProductos}" itemLabel="#{prod1.producto}" var="prod1" itemValue="#{prod1}"/>  
+                                            </p:selectOneMenu>                                          
+                                            <p:outputLabel value="Porcentaje"/>
+                                            <p:inputNumber/>
 
 
+                                            <h:outputText value="Producto 3" />
+                                            <p:selectOneMenu style=" width: 150px" value="#{parametrizacionController.listaProductos}">
+                                                <f:selectItems value="#{parametrizacionController.listaProductos}" itemLabel="#{prod1.producto}" var="prod1" itemValue="#{prod1}"/>  
+                                            </p:selectOneMenu>                                          
+                                            <p:outputLabel value="Porcentaje"/>
+                                            <p:inputNumber/>
+
+                                            <p:commandButton value="Asignar valores"/>
+
+                                        </p:panelGrid>
+
+                                    </p:panel>
+
+                                    <p:panel header="Etapa 2: Pelambre" >
+                                        <p:panelGrid columns="4" layout="grid">
+
+                                            <h:outputText value="Producto 1" />
+                                            <p:selectOneMenu style=" width: 150px" value="#{parametrizacionController.listaProductos}">
+                                                <f:selectItems value="#{parametrizacionController.listaProductos}" itemLabel="#{prod1.producto}" var="prod1" itemValue="#{prod1}"/>  
+                                            </p:selectOneMenu>                                          
+                                            <p:outputLabel value="Porcentaje"/>
+                                            <p:inputNumber/>
+
+                                            <h:outputText value="Producto 2" />
+                                            <p:selectOneMenu style=" width: 150px" value="#{parametrizacionController.listaProductos}">
+                                                <f:selectItems value="#{parametrizacionController.listaProductos}" itemLabel="#{prod1.producto}" var="prod1" itemValue="#{prod1}"/>  
+                                            </p:selectOneMenu>                                          
+                                            <p:outputLabel value="Porcentaje"/>
+                                            <p:inputNumber/>
+                                            <p:commandButton value="Asignar valores"/>
+
+                                        </p:panelGrid>
+                                    </p:panel>
+
+                                    <p:panel header="Etapa 3: Desencalado">
+                                        <p:panelGrid columns="4" layout="grid">
+
+                                            <h:outputText value="Producto 1" />
+                                            <p:selectOneMenu style=" width: 150px" value="#{parametrizacionController.listaProductos}">
+                                                <f:selectItems value="#{parametrizacionController.listaProductos}" itemLabel="#{prod1.producto}" var="prod1" itemValue="#{prod1}"/>  
+                                            </p:selectOneMenu>                                          
+                                            <p:outputLabel value="Porcentaje"/>
+                                            <p:inputNumber/>
+
+                                            <h:outputText value="Producto 2" />
+                                            <p:selectOneMenu style=" width: 150px" value="#{parametrizacionController.listaProductos}">
+                                                <f:selectItems value="#{parametrizacionController.listaProductos}" itemLabel="#{prod1.producto}" var="prod1" itemValue="#{prod1}"/>  
+                                            </p:selectOneMenu>                                          
+                                            <p:outputLabel value="Porcentaje"/>
+                                            <p:inputNumber/>
 
 
+                                            <h:outputText value="Producto 3" />
+                                            <p:selectOneMenu style=" width: 150px" value="#{parametrizacionController.listaProductos}">
+                                                <f:selectItems value="#{parametrizacionController.listaProductos}" itemLabel="#{prod1.producto}" var="prod1" itemValue="#{prod1}"/>  
+                                            </p:selectOneMenu>                                          
+                                            <p:outputLabel value="Porcentaje"/>
+                                            <p:inputNumber/>
+
+                                            <h:outputText value="Producto 4" />
+                                            <p:selectOneMenu style=" width: 150px" value="#{parametrizacionController.listaProductos}">
+                                                <f:selectItems value="#{parametrizacionController.listaProductos}" itemLabel="#{prod1.producto}" var="prod1" itemValue="#{prod1}"/>  
+                                            </p:selectOneMenu>                                          
+                                            <p:outputLabel value="Porcentaje"/>
+                                            <p:inputNumber/>
+
+                                            <h:outputText value="Producto 5" />
+                                            <p:selectOneMenu style=" width: 150px" value="#{parametrizacionController.listaProductos}">
+                                                <f:selectItems value="#{parametrizacionController.listaProductos}" itemLabel="#{prod1.producto}" var="prod1" itemValue="#{prod1}"/>  
+                                            </p:selectOneMenu>                                          
+                                            <p:outputLabel value="Porcentaje"/>
+                                            <p:inputNumber/>
+
+                                            <h:outputText value="Producto 6" />
+                                            <p:selectOneMenu style=" width: 150px" value="#{parametrizacionController.listaProductos}">
+                                                <f:selectItems value="#{parametrizacionController.listaProductos}" itemLabel="#{prod1.producto}" var="prod1" itemValue="#{prod1}"/>  
+                                            </p:selectOneMenu>                                          
+                                            <p:outputLabel value="Porcentaje"/>
+                                            <p:inputNumber/>
+
+                                            <h:outputText value="Producto 7" />
+                                            <p:selectOneMenu style=" width: 150px" value="#{parametrizacionController.listaProductos}">
+                                                <f:selectItems value="#{parametrizacionController.listaProductos}" itemLabel="#{prod1.producto}" var="prod1" itemValue="#{prod1}"/>  
+                                            </p:selectOneMenu>                                          
+                                            <p:outputLabel value="Porcentaje"/>
+                                            <p:inputNumber/>
+
+                                            <h:outputText value="Producto 8" />
+                                            <p:selectOneMenu style=" width: 150px" value="#{parametrizacionController.listaProductos}">
+                                                <f:selectItems value="#{parametrizacionController.listaProductos}" itemLabel="#{prod1.producto}" var="prod1" itemValue="#{prod1}"/>  
+                                            </p:selectOneMenu>                                          
+                                            <p:outputLabel value="Porcentaje"/>
+                                            <p:inputNumber/>
+
+                                            <p:commandButton value="Asignar valores"/>
+                                        </p:panelGrid>
+                                    </p:panel>
+
+                                    <p:panel header="Etapa 4: Piquelado">
+                                        <p:panelGrid columns="4" layout="grid">
+
+                                            <h:outputText value="Producto 1" />
+                                            <p:selectOneMenu style=" width: 150px" value="#{parametrizacionController.listaProductos}">
+                                                <f:selectItems value="#{parametrizacionController.listaProductos}" itemLabel="#{prod1.producto}" var="prod1" itemValue="#{prod1}"/>  
+                                            </p:selectOneMenu>                                          
+                                            <p:outputLabel value="Porcentaje"/>
+                                            <p:inputNumber/>
+
+                                            <h:outputText value="Producto 2" />
+                                            <p:selectOneMenu style=" width: 150px" value="#{parametrizacionController.listaProductos}">
+                                                <f:selectItems value="#{parametrizacionController.listaProductos}" itemLabel="#{prod1.producto}" var="prod1" itemValue="#{prod1}"/>  
+                                            </p:selectOneMenu>                                          
+                                            <p:outputLabel value="Porcentaje"/>
+                                            <p:inputNumber/>
+
+                                            <p:commandButton value="Asignar valores"/>
+
+                                        </p:panelGrid>
+                                    </p:panel>
+
+                                    <p:panel header="Etapa 5: Curtido">
+                                        <p:panelGrid columns="4" layout="grid">
+
+                                            <h:outputText value="Producto 1" />
+                                            <p:selectOneMenu style=" width: 150px" value="#{parametrizacionController.listaProductos}">
+                                                <f:selectItems value="#{parametrizacionController.listaProductos}" itemLabel="#{prod1.producto}" var="prod1" itemValue="#{prod1}"/>  
+                                            </p:selectOneMenu>                                          
+                                            <p:outputLabel value="Porcentaje"/>
+                                            <p:inputNumber/>
+
+                                            <h:outputText value="Producto 2" />
+                                            <p:selectOneMenu style=" width: 150px" value="#{parametrizacionController.listaProductos}">
+                                                <f:selectItems value="#{parametrizacionController.listaProductos}" itemLabel="#{prod1.producto}" var="prod1" itemValue="#{prod1}"/>  
+                                            </p:selectOneMenu>                                          
+                                            <p:outputLabel value="Porcentaje"/>
+                                            <p:inputNumber/>
+
+                                            <p:commandButton value="Asignar valores"/>
+                                        </p:panelGrid>
+                                    </p:panel>
+
+                                    <p:panel header="Etapa 6: Engrase">
+                                        <p:panelGrid columns="4" layout="grid">
+
+                                            <h:outputText value="Producto 1" />
+                                            <p:selectOneMenu style=" width: 150px" value="#{parametrizacionController.listaProductos}">
+                                                <f:selectItems value="#{parametrizacionController.listaProductos}" itemLabel="#{prod1.producto}" var="prod1" itemValue="#{prod1}"/>  
+                                            </p:selectOneMenu>                                          
+                                            <p:outputLabel value="Porcentaje"/>
+                                            <p:inputNumber/>
+
+                                            <h:outputText value="Producto 2" />
+                                            <p:selectOneMenu style=" width: 150px" value="#{parametrizacionController.listaProductos}">
+                                                <f:selectItems value="#{parametrizacionController.listaProductos}" itemLabel="#{prod1.producto}" var="prod1" itemValue="#{prod1}"/>  
+                                            </p:selectOneMenu>                                          
+                                            <p:outputLabel value="Porcentaje"/>
+                                            <p:inputNumber/>
 
 
+                                            <h:outputText value="Producto 3" />
+                                            <p:selectOneMenu style=" width: 150px" value="#{parametrizacionController.listaProductos}">
+                                                <f:selectItems value="#{parametrizacionController.listaProductos}" itemLabel="#{prod1.producto}" var="prod1" itemValue="#{prod1}"/>  
+                                            </p:selectOneMenu>                                          
+                                            <p:outputLabel value="Porcentaje"/>
+                                            <p:inputNumber/>
 
-                                                </h:panelGrid>
+                                            <h:outputText value="Producto 4" />
+                                            <p:selectOneMenu style=" width: 150px" value="#{parametrizacionController.listaProductos}">
+                                                <f:selectItems value="#{parametrizacionController.listaProductos}" itemLabel="#{prod1.producto}" var="prod1" itemValue="#{prod1}"/>  
+                                            </p:selectOneMenu>                                          
+                                            <p:outputLabel value="Porcentaje"/>
+                                            <p:inputNumber/>
 
-                                                <p:commandButton value="Asignar Valores"/>
-                                            </p:panel>
-                                        </p:tab>
-                                    </p:wizard>
+                                            <h:outputText value="Producto 5" />
+                                            <p:selectOneMenu style=" width: 150px" value="#{parametrizacionController.listaProductos}">
+                                                <f:selectItems value="#{parametrizacionController.listaProductos}" itemLabel="#{prod1.producto}" var="prod1" itemValue="#{prod1}"/>  
+                                            </p:selectOneMenu>                                          
+                                            <p:outputLabel value="Porcentaje"/>
+                                            <p:inputNumber/>
 
+                                            <h:outputText value="Producto 6" />
+                                            <p:selectOneMenu style=" width: 150px" value="#{parametrizacionController.listaProductos}">
+                                                <f:selectItems value="#{parametrizacionController.listaProductos}" itemLabel="#{prod1.producto}" var="prod1" itemValue="#{prod1}"/>  
+                                            </p:selectOneMenu>                                          
+                                            <p:outputLabel value="Porcentaje"/>
+                                            <p:inputNumber/>
+
+                                            <h:outputText value="Producto 7" />
+                                            <p:selectOneMenu style=" width: 150px" value="#{parametrizacionController.listaProductos}">
+                                                <f:selectItems value="#{parametrizacionController.listaProductos}" itemLabel="#{prod1.producto}" var="prod1" itemValue="#{prod1}"/>  
+                                            </p:selectOneMenu>                                          
+                                            <p:outputLabel value="Porcentaje"/>
+                                            <p:inputNumber/>
+
+                                            <h:outputText value="Producto 8" />
+                                            <p:selectOneMenu style=" width: 150px" value="#{parametrizacionController.listaProductos}">
+                                                <f:selectItems value="#{parametrizacionController.listaProductos}" itemLabel="#{prod1.producto}" var="prod1" itemValue="#{prod1}"/>  
+                                            </p:selectOneMenu>                                          
+                                            <p:outputLabel value="Porcentaje"/>
+                                            <p:inputNumber/>
+
+                                            <h:outputText value="Producto 9" />
+                                            <p:selectOneMenu style=" width: 150px" value="#{parametrizacionController.listaProductos}">
+                                                <f:selectItems value="#{parametrizacionController.listaProductos}" itemLabel="#{prod1.producto}" var="prod1" itemValue="#{prod1}"/>  
+                                            </p:selectOneMenu>                                          
+                                            <p:outputLabel value="Porcentaje"/>
+                                            <p:inputNumber/>
+
+                                            <h:outputText value="Producto 10" />
+                                            <p:selectOneMenu style=" width: 150px" value="#{parametrizacionController.listaProductos}">
+                                                <f:selectItems value="#{parametrizacionController.listaProductos}" itemLabel="#{prod1.producto}" var="prod1" itemValue="#{prod1}"/>  
+                                            </p:selectOneMenu>                                          
+                                            <p:outputLabel value="Porcentaje"/>
+                                            <p:inputNumber/>
+
+                                            <h:outputText value="Producto 11" />
+                                            <p:selectOneMenu style=" width: 150px" value="#{parametrizacionController.listaProductos}">
+                                                <f:selectItems value="#{parametrizacionController.listaProductos}" itemLabel="#{prod1.producto}" var="prod1" itemValue="#{prod1}"/>  
+                                            </p:selectOneMenu>                                          
+                                            <p:outputLabel value="Porcentaje"/>
+                                            <p:inputNumber/>
+
+                                            <h:outputText value="Producto 12" />
+                                            <p:selectOneMenu style=" width: 150px" value="#{parametrizacionController.listaProductos}">
+                                                <f:selectItems value="#{parametrizacionController.listaProductos}" itemLabel="#{prod1.producto}" var="prod1" itemValue="#{prod1}"/>  
+                                            </p:selectOneMenu>                                          
+                                            <p:outputLabel value="Porcentaje"/>
+                                            <p:inputNumber/>
+
+                                            <p:commandButton value="Asignar valores"/>
+                                        </p:panelGrid>
+                                    </p:panel>
                                 </p:panel>
                             </p:layoutUnit>
                         </p:layout>
                     </p:panel>
-
-
-
-
                 </h:form>
 
 
             </ui:define>
 
             <ui:define name="bottom">
-                
+
             </ui:define>
 
         </ui:composition>
 
     </body>
+
+
 </html>

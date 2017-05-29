@@ -1,0 +1,51 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:b="http://bootsfaces.net/ui">
+
+    <body>
+
+        <ui:composition template="./plantillas/mpAdmin.xhtml">
+
+            <ui:define name="content">
+                <!--Aca ira todo el contenido-->
+                <b:container>
+                    <b:panel look="primary" style="border-color: black">
+                        <b:column col-lg="1"></b:column>      
+                        <b:column col-lg="10">
+                            <br />
+                            <div class="panel panel-primary" style="border-color: black;"/>
+                            <br/>
+                            <b:row>
+                                <h:form>
+                                    <b:column col-lg="4" style="text-align: center">
+                                        <h:commandButton image="recursos/imagenes/usuarios2.png" action="/administracion/GestionUsuarioAdm.xhtml?faces-redirect=true" style="width: 200px;height: 200px"/>
+                                        <h3>Usuarios</h3>                                         
+                                    </b:column>
+
+                                    <b:column col-lg="4" style="text-align: center">
+                                        <h:commandButton image="recursos/imagenes/proveedores1.png" action="/catalogos/proveedores/ProveedorAdm.xhtml?faces-redirect=true" style="width: 200px;height: 200px"/>
+                                        <h3>Proveedores</h3>                   
+                                    </b:column>
+
+                                    <b:column col-lg="4" style="text-align: center">
+                                        <h:commandButton image="recursos/imagenes/productos.png"  action="/catalogos/productos/ProductosAdm.xhtml?faces-redirect=true" style="width: 200px;height: 200px"/>
+                                        <h3>Productos</h3>                                   
+                                    </b:column>
+
+                                </h:form>
+                            </b:row>
+                            <br/>
+                            <div class="panel panel-primary" style="border-color: black;"/>
+                            <br/>
+                        </b:column>
+                    </b:panel>
+                </b:container>
+            </ui:define>
+
+        </ui:composition>
+
+    </body>
+</html>

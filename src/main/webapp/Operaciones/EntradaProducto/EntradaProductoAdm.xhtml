@@ -4,248 +4,303 @@
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:p="http://primefaces.org/ui"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:f="http://xmlns.jcp.org/jsf/core">
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:b="http://bootsfaces.net/ui">
 
     <body>
 
         <ui:composition template="./../../plantillas/mpAdmin.xhtml">
 
             <ui:define name="content">
+
                 <!--Aca ira todo el contenido-->
-                <!--Aca ira todo el contenido-->
-                <div class="container">
+                <b:container>
+                    <h:form id="frmEntrada">
+                        <p:growl id="growlR" autoUpdate="false" severity="info, fatal" showSummary="true" showDetail="true"/>
+                        <b:panel collapsible="false" look="primary" 
+                                 style="text-align: center;border-color: black;">
+                            <f:facet name="heading">
+                                <h4>Registro de Facturas de Compra de Productos</h4>
+                            </f:facet>
+                            <b:column col-lg="12" >
+                                <br/><br/>
+                                <b:panel look="primary" collapsible="false" style="border-color: black;text-align: center">
+                                    <f:facet name="heading">
+                                        <h4>Datos generales de la factura</h4>
+                                    </f:facet>
+                                    <h:form id="frmDatosFactura">
+                                        <b:column col-lg="3" style="text-align: right;padding-top: 3px">
+                                            Fecha de Factura:
+                                        </b:column>
+                                        <b:column col-lg="3" style="text-align: left;padding-right: 20px">
+                                            <p:calendar id="fechaFac" value="#{entradaProductoController.factura.fechaRegistro}" locale="es" 
+                                                        yearRange="c-100:c+100" navigator="true" pattern="dd/MM/yyyy" />
+                                        </b:column>
+                                        <b:column col-lg="3" style="text-align: right;padding-top: 5px">
+                                            N° de Factura:
+                                        </b:column>
+                                        <b:column col-lg="2">
+                                            <b:inputText value="#{entradaProductoController.factura.numeroFactura}"/>
+                                        </b:column>
+                                    </h:form>
+                                </b:panel>
+
+                                <b:panel id="datosP" look="primary" collapsible="false" style="border-color: black;text-align: center">
+                                    <f:facet name="heading">
+                                        <h4>Datos del Proveedor</h4>
+                                    </f:facet>
+
+                                    <b:column col-md="4"></b:column>
+                                    <b:column col-md="4">
+                                        <p:commandButton id="btnProveedor"  oncomplete="PF('dlgProveedores').show();"
+                                                         update='dlgProveedor'
+                                                         value="Buscar Proveedor" class="form-control" style="background-color:#D2D4D6;color: black;border-color: black;"/>
+                                    </b:column>
+                                    <b:column col-md="4"></b:column>
+
+                                    <br/><br/>
+
+                                    <b:column col-lg="4" style="text-align: right;padding-top: 5px">
+                                        Proveedor:
+                                    </b:column>
+                                    <b:column col-lg="4" style="text-align: center;padding-top: 5px">
+                                        <p:outputLabel id="lblProveedor" value="#{entradaProductoController.factura.proveedor.proveedor}" style="font-weight: bold"/>
+                                    </b:column>
+                                    <br/><br/>
+                                    <b:column col-lg="4" style="text-align: right;padding-top: 5px">
+                                        Propietario:
+                                    </b:column>
+                                    <b:column col-lg="4" style="text-align: center;padding-top: 5px">
+                                        <p:outputLabel id="lblPropietario" value="#{entradaProductoController.factura.proveedor.propietario}" style="font-weight: bold"/>
+                                    </b:column>
+                                    <br/><br/>
+                                    <b:column col-lg="4" style="text-align: right;padding-top: 5px">
+                                        NIT:
+                                    </b:column>
+                                    <b:column col-lg="4" style="text-align: center;padding-top: 5px">
+                                        <p:outputLabel id="lblNCR" value="#{entradaProductoController.factura.proveedor.nit}" style="font-weight: bold"/>
+                                    </b:column>
+                                    <br/><br/>
+                                    <b:column col-lg="4" style="text-align: right;padding-top: 5px">
+                                        Direccion:
+                                    </b:column>
+                                    <b:column col-lg="4" style="text-align: center;padding-top: 5px">
+                                        <p:outputLabel id="lblDireccion" value="#{entradaProductoController.factura.proveedor.direccion}" style="font-weight: bold"/>
+                                    </b:column>
+                                    <br/><br/>
+                                    <b:column col-lg="4" style="text-align: right;padding-top: 5px">
+                                        Teléfono:
+                                    </b:column>
+                                    <b:column col-lg="4" style="text-align: center;padding-top: 5px">
+                                        <p:outputLabel id="lblTelefono" value="#{entradaProductoController.factura.proveedor.telefono}" style="font-weight: bold"/>
+                                    </b:column>
+                                    <br/><br/>
+                                </b:panel>
+
+                                <b:panel id="datosProd" look="primary" collapsible="false" style="border-color: black;text-align: center">
+                                    <f:facet name="heading">
+                                        <h4>Productos</h4>
+                                    </f:facet>
+                                    <b:column col-md="4"></b:column>
+                                    <b:column col-md="4">
+                                        <p:commandButton value="Buscar Producto" oncomplete="PF('dlgProductos').show();" 
+                                                         class="form-control" style="background-color:#D2D4D6;color: black;border-color: black;"/>
+                                    </b:column>
+                                    <b:column col-md="4"></b:column>
+
+                                    <br/><br/><br/>
+                                    <b:row>
+                                        <b:column col-lg="2" style="text-align: right;padding-top: 5px">
+                                            Producto:
+                                        </b:column>
+                                        <b:column col-lg="3">
+                                            <b:inputText id="txtNP" value="#{entradaProductoController.productoSeleccionado.producto}" disabled="true"/>
+                                        </b:column>
+                                        <b:column col-lg="2" style="text-align: right;padding-top: 5px">
+                                            Unidad de Medida:
+                                        </b:column>
+                                        <b:column col-lg="3">
+                                            <b:inputText id="txtTP" value="#{entradaProductoController.productoSeleccionado.unidadMedida}" disabled="true"/>
+                                        </b:column>
+                                    </b:row>
+
+                                    <b:row>
+                                        <b:column col-lg="2" style="text-align: right;padding-top: 5px">
+                                            Cantidad:
+                                        </b:column>
+                                        <b:column col-lg="3">
+                                            <b:inputText id="txtCant" value="#{entradaProductoController.detalleFactura.cantidad}"/>
+                                        </b:column>
+                                        <b:column col-lg="2" style="text-align: right;padding-top: 5px">
+                                            Precio unitario:
+                                        </b:column>
+                                        <b:column col-lg="3">
+                                            <b:inputText id="txtPU" value="#{entradaProductoController.detalleFactura.precioUnitario}" />
+                                        </b:column>
+                                    </b:row>
+                                    <br/>
+
+                                    <b:row>
+                                        <b:column col-lg="5"></b:column>
+                                        <b:column col-lg="2">
+                                            <p:commandButton value="Guardar" actionListener="#{entradaProductoController.guardarDetalle()}" 
+                                                             class="form-control" style="background-color:#D2D4D6;color: black;border-color: black;"
+                                                             update=":frmEntrada:tablaDetalleFactura :frmEntrada:gridTotalFactura :frmEntrada:datosProd frmEntrada:datosP"/>
+                                        </b:column>
+                                    </b:row>
+
+                                </b:panel>
+                                <br/>
+                                <p:dataTable id="tablaDetalleFactura" var="detalle" value="#{entradaProductoController.listaDetalleFactura}" editable="true" editMode="cell">
+                                    <p:column headerText="Producto">
+                                        <h:outputText value="#{detalle.idCatalogoProducto.producto}"/>
+                                    </p:column>
+
+
+                                    <p:column headerText="Unidad de Medida">
+
+                                        <h:outputText value="#{detalle.idCatalogoProducto.unidadMedida}" />
+
+                                    </p:column>
+
+                                    <p:column headerText="Cantidad Producto">
+
+                                        <h:outputText value="#{detalle.cantidad}" />
+
+                                    </p:column>
+
+                                    <p:column headerText="Precio Unitario">
+
+                                        $<h:outputText value="#{detalle.precioUnitario}" />
+
+                                    </p:column>
+
+                                    <p:column  id="total" headerText="Total">
+
+                                        <h:outputText id="txtTotal" value="#{detalle.totalCompra}" >
+
+                                        </h:outputText>
+                                    </p:column>
+
+                                </p:dataTable>
+                                <br/>
+                                <h:panelGrid id="gridTotalFactura" columns="2" style="font-size: 24px; margin: 0 auto">
+                                    Total Factura $
+                                    <p:outputLabel value="#{entradaProductoController.factura.totalVenta}" style="font-size: 24px;padding-top: 5px"/>
+                                </h:panelGrid>
+                                <b:row>
+                                    <b:column col-lg="4"/>
+                                    <b:column col-lg="4">
+                                        <p:commandButton action="EntradaProductoAdm.xhtml?faces-redirect=true" update="growlR"
+                                                         value="Registrar" actionListener="#{entradaProductoController.guardarCompra()}" 
+                                                         class="form-control" style="background-color:#D2D4D6;color: black;border-color: black;"/>
+                                    </b:column>
+                                </b:row>
+                            </b:column>
+                        </b:panel>
+                    </h:form>
+                </b:container>
+
+
+
+                <p:dialog id="dlgProveedor" widgetVar="dlgProveedores" modal="true" 
+                          resizable="false" showEffect="explode" hideEffect="explode" style="width: 700px">
+                    <h:form id="frmMostrarProveedores">
+                        <p:dataTable id="tablaProvedores" var="proveedor" value="#{proveedorController.proveedores}" 
+
+                                     emptyMessage="No hay datos de proveedores"
+                                     paginator="true" rows="5" paginatorPosition="top"
+                                     paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks}
+                                     {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                                     rowsPerPageTemplate="5" reflow="true" resizeMode="expand" rowExpandMode="multiply"  widgetVar="data" style="width: 900px" >
+
+                            <f:facet name="header" >
+                                <p:outputPanel style="height: available">
+                                    <h:outputText value="Buscar en todos los campos" style="padding-right: 20px"/>
+                                    <p:inputText  id="globalFilter" onkeyup= "PF('data').filter()" placeholder="Ingrese cualquier palabra o numero"  style="width: 350px"/> 
+                                </p:outputPanel>
+                                <BR/>
+                            </f:facet>
+
+                            <p:column headerText="Proveedor"  style="text-align: center">
+                                <h:outputText value="#{proveedor.proveedor}"  />
+                            </p:column>
+                            <p:column headerText="Propietario"  style="text-align: center">
+                                <h:outputText value="#{proveedor.propietario}"/>
+                            </p:column>
+                            <p:column headerText="NIT"  style="text-align: center">
+                                <h:outputText value="#{proveedor.nit}"/>
+                            </p:column>
+                            <p:column headerText="Direccion"   style="text-align: center">
+                                <h:outputText value="#{proveedor.direccion}"/>
+                            </p:column>
+
+                            <p:column headerText="Teléfono"  style="text-align: center">
+                                <h:outputText value="#{proveedor.telefono}"/>
+                            </p:column>
+
+                            <p:column headerText="Accion" style="text-align: center">
+                                <p:commandButton process="tablaProvedores" value="Seleccionar"  oncomplete="PF('dlgProveedores').hide();" 
+                                                 update="frmEntrada:datosP" > 
+                                    <p:effect type="bounce" event="click" />
+                                    <f:setPropertyActionListener value="#{proveedor}" target="#{entradaProductoController.factura.proveedor}" />
+                                </p:commandButton>
+                            </p:column>
+                        </p:dataTable>
+                    </h:form>
+
+                </p:dialog>
+
+                <!--- Dialogo para mostrar Proveedores -->
+
+
+                <!-- Dialogo Para Mostrar el producto que va agregar al detalle de la factura -->
+
+                <p:dialog id="dlgProducto" widgetVar="dlgProductos" modal="true" 
+                          resizable="false" showEffect="explode" hideEffect="explode" style="width: 700px">
+
+
+                    <h:form id="frmMostrarProductos">
+                        <p:dataTable id="tablaProductos" var="producto" value="#{productoController.productos}"
+
+                                     emptyMessage="No hay datos de productos"
+                                     paginator="true" rows="5" paginatorPosition="bottom"
+                                     paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks}
+                                     {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                                     rowsPerPageTemplate="5" reflow="true" resizeMode="expand" rowExpandMode="multiply"  widgetVar="data" style="width: 900px" >
+                            <f:facet name="header" >
+                                <p:outputPanel style="height: available">
+                                    <h:outputText value="Buscar en todos los campos" style="padding-right: 20px"/>
+                                    <p:inputText  id="globalFilter" onkeyup= "PF('data').filter()" placeholder="Ingrese cualquier palabra o numero"  style="width: 350px"/> 
+                                </p:outputPanel>
+                                <BR/>
+                            </f:facet>
+                            <p:column headerText="Producto"  style="text-align: center">
+                                <h:outputText value="#{producto.producto}"  />
+                            </p:column>
+
+                            <p:column headerText="Unidad de Medida"  style="text-align: center">
+                                <h:outputText value="#{producto.unidadMedida}"/>
+                            </p:column>
+
+                            <p:column headerText="Cantidad Actual"  style="text-align: center">
+                                <h:outputText value="#{producto.stockActual}"/>
+                            </p:column>
+
+                            <p:column headerText="Acccion" style="text-align: center">
+                                <p:commandButton process="tablaProductos" value="Seleccionar"  oncomplete="PF('dlgProductos').hide();" 
+                                                 update=":frmEntrada:datosProd"  > 
+                                    <f:setPropertyActionListener value="#{producto}" target="#{entradaProductoController.productoSeleccionado}" />
+                                </p:commandButton>
+                            </p:column>
+                        </p:dataTable>
+                    </h:form>
+                </p:dialog>
 
-                    <div class="row">
 
-                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                            <div class="panel panel-primary" style="border-color: black">
-                                <div class="panel-body" >
-                                    <div class="row">
-                                        <div class="col-lg-1"></div>      
-                                        <div class="col-lg-10" >
-                                            <br />
-                                            <div class="form-group">
 
 
-                                                <!--<div class="panel panel-primary" style="border-color: black;"/>Separator parte de arriba-->
 
-                                                <div class="row">
-
-
-
-                                                    <div class="panel panel-primary" style="border-color: black">
-
-                                                        <div class="panel-heading" style="border-color: black;text-align: center;background-color:#04536C;color: white"><h4>Registro de Facturas de Compra de Productos</h4></div>
-                                                        <div class="panel-body">
-
-                                                            <br/>
-                                                            <div class="col-md-12">
-                                                                <div class="panel panel-primary" style="border-color: black;">
-                                                                    <div class="panel-heading" style="border-color: black;text-align: center;background-color: #04536C">Datos Generales de la Factura</div>
-                                                                    <div class="panel-body">
-
-                                                                        <div class="col-md-2" style="text-align: right;padding-top: 5px">
-                                                                            Fecha Factura
-                                                                        </div>
-
-                                                                        <div class="col-md-3">
-                                                                            <p:calendar id="txtFecha"  navigator="true"  showOn="button"  
-                                                                                        yearRange="c-100:c-0" locale="es" pattern="dd/MM/yyyy" required="true" 
-                                                                                        value="#{entradaProductoController.factura.fechaRegistro}" />
-                                                                        </div>
-
-                                                                        <div class="col-md-2" style="text-align: right;padding-top: 5px">
-                                                                            N° Factura
-                                                                        </div>
-
-                                                                        <div class="col-md-2">
-                                                                            <h:inputText class="form-control" value="#{entradaProductoController.factura.numeroFactura}" />
-                                                                        </div>
-
-                                                                        <div class="col-md-3">
-                                                                            <h:commandButton id="btnRegistrarU"  actionListener="#{usuarioController.registrar()}" value="Buscar Proveedor" class="form-control" style="background-color:#D2D4D6;color: black;border-color: black;"/>
-                                                                        </div>
-
-                                                                        <br/><br/>
-
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-
-                                                            <!--Este el otro panel-->
-                                                            <div class="col-md-12">
-                                                                <div class="panel panel-primary" style="border-color: black;">
-                                                                    <div class="panel-heading" style="border-color: black;text-align: center;background-color: #04536C">Datos del Proveedor</div>
-                                                                    <div class="panel-body">
-
-                                                                        <div class="col-md-4 col-xs-12" style="text-align: right;padding-top: 5px;"><!--Nombres-->
-                                                                            Proveedor:
-                                                                        </div>
-
-                                                                        <div class="col-md-5 col-xs-12">
-
-
-                                                                        </div>
-                                                                        <div class="col-md-3">
-                                                                        </div><!--Aqui acaba Nombres-->
-                                                                        <br/><br/>
-
-                                                                        <div class="col-md-4 col-xs-12" style="text-align: right;padding-top: 5px;"><!--Apellidos-->
-                                                                            Propietario:
-                                                                        </div>
-
-                                                                        <div class="col-md-5 col-xs-12">
-
-
-                                                                        </div>
-                                                                        <div class="col-md-3">
-                                                                        </div><!--Aqui acaba Apellidos-->
-                                                                        <br/><br/>
-
-                                                                        <div class="col-md-4 col-xs-12" style="text-align: right;padding-top: 5px;"><!--Sexo-->
-                                                                            Dirección del proveedor:
-                                                                        </div>
-
-                                                                        <div class="col-md-5 col-xs-12">
-
-
-                                                                        </div>
-                                                                        <div class="col-md-3">
-                                                                        </div><!--Aqui acaba Sexo-->
-                                                                        <br/><br/>
-
-
-                                                                        <div class="col-md-4 col-xs-12" style="text-align: right;padding-top: 5px;"><!--DUI-->
-                                                                            Teléfono del proveedor:
-                                                                        </div>
-
-                                                                        <div class="col-md-5 col-xs-12">
-
-
-                                                                        </div>
-
-                                                                        <div class="col-md-3">
-                                                                        </div>      
-
-
-                                                                        <br/><br/>
-
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                            <br/><br/>
-                                                            <!--Este es el tercer panel-->
-                                                            <div class="col-md-12">
-                                                                <div class="panel panel-primary" style="border-color: black;">
-                                                                    <div class="panel-heading" style="border-color: black;text-align: center;background-color: #04536C">Datos del Proveedor</div>
-                                                                    <div class="panel-body">
-
-                                                                        <div class="col-md-3 col-xs-12"><!--Nombres-->
-                                                                            <h:commandButton id="btnRegistrarU"  actionListener="#{usuarioController.registrar()}" value="Buscar Producto" class="form-control" style="background-color:#D2D4D6;color: black;border-color: black;"/>
-                                                                        </div>
-
-                                                                        <div class="col-md-3 col-xs-12">
-
-                                                                            <h:inputText class="form-control" disabled="true"/>
-                                                                        </div>
-                                                                        <div class="col-md-3" style="padding-top: 5px;text-align: right">
-                                                                            Unidad de medida: 
-                                                                        </div><!--Aqui acaba Nombres-->
-
-                                                                        <div class="col-md-3"><!--Apellidos-->
-                                                                            <h:inputText class="form-control" disabled="true"/>
-                                                                        </div>
-
-                                                                        <br/><br/><br/>
-
-                                                                        <div class="col-md-3 col-xs-12" style="text-align: right;padding-top:7px"><!--Nombres-->
-                                                                            Cantidad:
-                                                                        </div>
-
-                                                                        <div class="col-md-3 col-xs-12">
-
-                                                                            <h:inputText class="form-control"/>
-                                                                        </div>
-                                                                        <div class="col-md-3" style="padding-top: 5px;text-align: right">
-                                                                            Precio unitario: 
-                                                                        </div><!--Aqui acaba Nombres-->
-
-                                                                        <div class="col-md-3"><!--Apellidos-->
-                                                                            <h:inputText class="form-control" />
-                                                                        </div>
-
-
-
-                                                                        <br/><br/><br/>
-                                                                        <!-- Tabla detalle Factura -->
-                                                                        <p:dataTable id="tablaDetalleFactura" var="detalle" value="#{entradaProductoController.listaDetalleFactura}" editable="true" editMode="cell">
-                                                                            <p:column headerText="Producto">
-                                                                                <h:outputText value="#{detalle.idCatalogoProducto.producto}"/>
-                                                                            </p:column>
-
-
-                                                                            <p:column headerText="Unidad de Medida">
-
-                                                                                <h:outputText value="#{detalle.idCatalogoProducto.unidadMedida}" />
-
-                                                                            </p:column>
-
-                                                                            <p:column headerText="Cantidad Producto">
-
-                                                                                <h:outputText value="#{detalle.cantidad}" />
-
-                                                                            </p:column>
-
-                                                                            <p:column headerText="Precio Unitario">
-
-                                                                                $<h:outputText value="#{detalle.precioUnitario}" />
-
-                                                                            </p:column>
-
-                                                                            <p:column  id="total" headerText="Total">
-
-                                                                                <h:outputText  id="txtTotal" value="#{detalle.totalCompra}" >
-
-                                                                                </h:outputText>
-                                                                            </p:column>
-
-                                                                        </p:dataTable>
-
-
-                                                                        <h:panelGrid id="gridTotalFactura" columns="2" style="font-size: 24px; margin: 0 auto">
-                                                                            <br/>
-                                                                            Total Factura $
-                                                                            <p:outputLabel value="#{entradaProductoController.factura.totalVenta}"/>
-                                                                        </h:panelGrid>
-
-
-                                                                        <p:separator/>
-                                                                        <div class="col-md-4" align="center">
-                                                                            <h:commandButton id="btnRegistrarU"  actionListener="#{usuarioController.registrar()}" value="Registrar" class="form-control" style="background-color:#D2D4D6;color: black;border-color: black;"/>
-                                                                            
-                                                                        </div>
-                                                                        <div class="col-md-4" align="center">
-                                                                            <h:commandButton id="btnRegistrarU"  actionListener="#{usuarioController.registrar()}" value="Imprimir" class="form-control" style="background-color:#D2D4D6;color: black;border-color: black;"/>
-                                                                        </div>
-                                                                        <div class="col-md-4" align="center">
-                                                                            <h:commandButton id="btnRegistrarU"  actionListener="#{usuarioController.registrar()}" value="Cancelar" class="form-control" style="background-color:#D2D4D6;color: black;border-color: black;"/>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="col-md-2"></div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
 
             </ui:define>
 

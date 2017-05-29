@@ -7,7 +7,7 @@ package com.tenerianoe.controller;
 
 
 import com.tenerianoe.ejb.CatalogoProductoFacadeLocal;
-import com.tenerianoe.model.CatalogoProducto;
+import com.tenerianoe.model.catalogo_producto;
 import java.io.Serializable;
 import java.util.List;
 import javax.annotation.PostConstruct;
@@ -28,13 +28,13 @@ public class ProductoController implements Serializable {
     @EJB
     private CatalogoProductoFacadeLocal productoEJB;
 
-    private CatalogoProducto producto;
+    private catalogo_producto producto;
 
-    private List<CatalogoProducto> productos;
+    private List<catalogo_producto> productos;
 
     @PostConstruct
     public void init() {
-        producto = new CatalogoProducto();
+        producto = new catalogo_producto();
         productos = productoEJB.findAll();
 
     }
@@ -54,7 +54,8 @@ public class ProductoController implements Serializable {
         public void modificar() {
         try {
             productoEJB.edit(producto);
-            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Aviso", "Se registró"));
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Aviso", "Productro modificado con éxito"));
+            FacesContext.getCurrentInstance().getExternalContext().getFlash().setKeepMessages(true);
         } catch (Exception e) {
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_FATAL, "Aviso", "Error!"));
 
@@ -63,25 +64,20 @@ public class ProductoController implements Serializable {
     }
 
     //Getter y Setter
-    public CatalogoProducto getProducto() {
+    public catalogo_producto getProducto() {
         return producto;
     }
 
-    public void setProducto(CatalogoProducto producto) {
+    public void setProducto(catalogo_producto producto) {
         this.producto = producto;
     }
 
-    public List<CatalogoProducto> getProductos() {
+    public List<catalogo_producto> getProductos() {
         return productos;
     }
 
-    public void setProductos(List<CatalogoProducto> productos) {
+    public void setProductos(List<catalogo_producto> productos) {
         this.productos = productos;
-    }
-    
-        //Metodo para limpiar Factura
-    public void limpiarModal() {
-        this.producto = new CatalogoProducto();
     }
 
 }

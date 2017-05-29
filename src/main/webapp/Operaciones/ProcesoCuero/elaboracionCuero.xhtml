@@ -10,12 +10,13 @@
         <br/>
 
         <ui:composition template="./../../plantillas/Template.xhtml">
-            
+
 
             <ui:define name="content">
                 <br/>
 
                 <h:form>
+                    <p:growl id="msj"/>
                     <br/>
 
                     <p:panel header="Elaboracion de Cuero"
@@ -40,11 +41,12 @@
                                     <p:separator/>
                                     <p:panelGrid columns="5" layout="grid">
                                         <p:outputLabel value="Fecha de Inicio de Proceso"/>
-                                        <p:calendar id="txtFecha"  navigator="true"  showOn="button"  
+                                        <p:calendar value="#{produccionController.produccion.fechaInicio}" id="txtFecha"  navigator="true"  showOn="button"  
                                                     yearRange="c-100:c+100" locale="es" pattern="dd/MM/yyyy" 
                                                     required="true"  />
                                         <p:outputLabel value="Fecha Estimada de Finalizacion" />
-                                        <p:calendar id="Fecha"  navigator="true"  showOn="button"  
+                                        <p:calendar value="#{produccionController.produccion.fechaFinalizacion}" 
+                                                    id="Fecha"  navigator="true"  showOn="button"  
                                                     yearRange="c-100:c+100" locale="es" pattern="dd/MM/yyyy" 
                                                     required="true" />                
                                     </p:panelGrid>
@@ -52,140 +54,75 @@
                                     <p:separator/>
                                     <p:panelGrid columns="4" layout="grid" >
                                         <p:outputLabel value="Tipo de Piel"/>
-                                        <p:selectOneMenu >
-                                            <f:selectItem noSelectionOption="true" itemLabel="---Seleccione---"/>
+                                        <p:selectOneMenu effect="fade" filter="true" filterMatchMode="contains"
+                                                         style=" width: 150px" 
+                                                         value="#{produccionController.produccion.tipoPiel}" >
+                                            <f:selectItem noSelectionOption="true" itemLabel="--- Seleccione ---"/>
                                             <f:selectItem itemLabel="VACUNO" itemValue="nac"/>
-
-                                        </p:selectOneMenu>                                        <p:outputLabel value="Procedencia de Piel"/>
-                                        <p:selectOneMenu >
-                                            <f:selectItem noSelectionOption="true" itemLabel="---Seleccione---"/>
-                                            <f:selectItem itemLabel="Nacional" itemValue="nac"/>
-                                            <f:selectItem itemLabel="Internacional" itemValue="inter"/>
+                                        </p:selectOneMenu>                                       
+                                        <p:outputLabel value="Procedencia de Piel"/>
+                                        <p:selectOneMenu effect="fade" filter="true" filterMatchMode="contains"
+                                                        style=" width: 150px" 
+                                                         value="#{produccionController.produccion.procedenciaPiel}" >
+                                            <f:selectItem noSelectionOption="true" itemLabel="--- Seleccione ---"/>
+                                            <f:selectItem itemLabel="Nacional" itemValue="Nacional"/>
+                                            <f:selectItem itemLabel="Internacional" itemValue="Internacional"/>
                                         </p:selectOneMenu>
 
                                         <p:outputLabel value="Cantidad de Piel"/>
-                                        <p:inputNumber />
+                                        <p:inputNumber value="#{produccionController.produccion.cantidadPiel}" />
 
                                         <p:outputLabel value="Grosor de la piel"/>
-                                        <p:inputNumber/>
+                                        <p:inputNumber value="#{produccionController.produccion.grosorPiel}" />
                                     </p:panelGrid>
 
                                     <p:separator/>
 
-                                    <p:commandButton value="Generar Proceso" 
+                                    <p:commandButton value="Generar Proceso"  actionListener="#{produccionController.generarProcesoCuero()}"
+                                                     update="msj"
                                                      style="width: 150px; height: 60px; padding: 15px"/>
 
                                     <p:outputLabel style=" position: absolute; left: 600px" value="Proceso No"/>
 
-                                    <p:outputLabel style=" position: absolute; left: 700px; font-size: 18px;font-style: initial" value="1"/>
+                                    <p:outputLabel style=" position: absolute; left: 700px; font-size: 18px;font-style: initial"
+                                                   value="#{produccionController.obtenerUltimoNumeroProceso()}"/>
 
                                 </p:panel>
 
 
                                 <p:panel header="Informacion de procesos">
 
-                                    <p:panel header="Etapa 1: Remojo "  >
-                                        <p:panelGrid columns="4" layout="grid">
 
-                                            <h:outputText value="Bisulfito " />
-                                            <h:outputText value="30 LB" styleClass="outputLabel"/>
+                                    <p:dataTable id="tblParametros" widgetVar="insumosTable" var="insumo" 
+                                                 value="#{produccionController.listaDetallesProduccionPorProceso}"
+                                                 expandableRowGroups="true" sortBy="#{insumo.etapaProduccion}"
+                                                 emptyMessage="No hay producto parametrizados por etapa" >
 
-                                            <h:outputText value="Cloruro de Potasio" />
-                                            <h:outputText value="10 LB" styleClass="outputLabel"/>
+                                        <p:ajax event="sort" skipChildren="false"/>
 
-                                            <h:outputText value="Bromuro" />
-                                            <h:outputText value="15 LB" styleClass="outputLabel"/>
+                                        <p:headerRow>
+                                            <p:column >
+                                                <p:outputLabel value="#{insumo.etapaProduccion}"/>
+                                            </p:column>
+                                            <p:column/>
 
-                                            <h:outputText value="Desengrasador" />
-                                            <h:outputText value="5 LB"/>
-                                        </p:panelGrid>
 
-                                    </p:panel>
+                                        </p:headerRow>
 
-                                    <p:panel header="Etapa 2: Pelambre">
-                                        <p:panelGrid columns="4" layout="grid">
 
-                                            <h:outputText value="Bisulfito " />
-                                            <h:outputText value="30 LB" styleClass="outputLabel"/>
+                                        <p:column headerText="Producto">
+                                            <p:outputLabel value="#{insumo.idCatalogoProducto.producto}"/>
 
-                                            <h:outputText value="Cloruro de Potasio" />
-                                            <h:outputText value="10 LB" styleClass="outputLabel"/>
+                                        </p:column>
 
-                                            <h:outputText value="Bromuro" />
-                                            <h:outputText value="15 LB" styleClass="outputLabel"/>
+                                        <p:column headerText="Cantidades">
+                                            <p:outputLabel value="#{insumo.cantidadProducto} LB" />
 
-                                            <h:outputText value="Desengrasador" />
-                                            <h:outputText value="5 LB"/>
-                                        </p:panelGrid>
-                                    </p:panel>
+                                        </p:column>
 
-                                    <p:panel header="Etapa 3: Desencalado">
-                                        <p:panelGrid columns="4" layout="grid">
 
-                                            <h:outputText value="Bisulfito " />
-                                            <h:outputText value="30 LB" styleClass="outputLabel"/>
 
-                                            <h:outputText value="Cloruro de Potasio" />
-                                            <h:outputText value="10 LB" styleClass="outputLabel"/>
-
-                                            <h:outputText value="Bromuro" />
-                                            <h:outputText value="15 LB" styleClass="outputLabel"/>
-
-                                            <h:outputText value="Desengrasador" />
-                                            <h:outputText value="5 LB"/>
-                                        </p:panelGrid>
-                                    </p:panel>
-
-                                    <p:panel header="Etapa 4: Piquelado">
-                                        <p:panelGrid columns="4" layout="grid">
-
-                                            <h:outputText value="Bisulfito " />
-                                            <h:outputText value="30 LB" styleClass="outputLabel"/>
-
-                                            <h:outputText value="Cloruro de Potasio" />
-                                            <h:outputText value="10 LB" styleClass="outputLabel"/>
-
-                                            <h:outputText value="Bromuro" />
-                                            <h:outputText value="15 LB" styleClass="outputLabel"/>
-
-                                            <h:outputText value="Desengrasador" />
-                                            <h:outputText value="5 LB"/>
-                                        </p:panelGrid>
-                                    </p:panel>
-
-                                    <p:panel header="Etapa 5: Curtido">
-                                        <p:panelGrid columns="4" layout="grid">
-
-                                            <h:outputText value="Bisulfito " />
-                                            <h:outputText value="30 LB" styleClass="outputLabel"/>
-
-                                            <h:outputText value="Cloruro de Potasio" />
-                                            <h:outputText value="10 LB" styleClass="outputLabel"/>
-
-                                            <h:outputText value="Bromuro" />
-                                            <h:outputText value="15 LB" styleClass="outputLabel"/>
-
-                                            <h:outputText value="Desengrasador" />
-                                            <h:outputText value="5 LB"/>
-                                        </p:panelGrid>
-                                    </p:panel>
-
-                                    <p:panel header="Etapa 6: Engrase">
-                                        <p:panelGrid columns="4" layout="grid">
-
-                                            <h:outputText value="Bisulfito " />
-                                            <h:outputText value="30 LB" styleClass="outputLabel"/>
-
-                                            <h:outputText value="Cloruro de Potasio" />
-                                            <h:outputText value="10 LB" styleClass="outputLabel"/>
-
-                                            <h:outputText value="Bromuro" />
-                                            <h:outputText value="15 LB" styleClass="outputLabel"/>
-
-                                            <h:outputText value="Desengrasador" />
-                                            <h:outputText value="5 LB"/>
-                                        </p:panelGrid>
-                                    </p:panel>
+                                    </p:dataTable>
 
                                 </p:panel>
                             </p:layoutUnit>

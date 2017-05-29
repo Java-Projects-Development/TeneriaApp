@@ -1,0 +1,226 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:b="http://bootsfaces.net/ui">
+
+      <body>
+
+            <ui:composition template="./../../plantillas/mpAdmin.xhtml">
+
+                  <ui:define name="content">
+                        <!--Aca ira todo el contenido-->
+                        <b:container>
+                              <b:panel collapsible="false" look="primary" 
+                                       style="text-align: center;border-color: black;">
+                                    <f:facet name="heading">
+                                          <h4>Gestión de Proveedores</h4>
+                                    </f:facet>
+                                    <b:column col-lg="12" >
+                                          <br/>
+                                          <b:column col-md="4"></b:column >
+                                          <b:column col-md="4" style="padding-left:55px">
+                                                <h:commandButton class="form-control" value="Registrar Proveedor" onclick="$('#modalRegistrar').modal('show');" style="background-color:#D2D4D6;color: black;border-color: black" immediate="true" />
+
+                                          </b:column >
+
+                                          <br/><br/><br/>
+                                          <b:panel look="primary" collapsible="false" style="border-color: black;text-align: center">
+                                                <f:facet name="heading">
+                                                      <h4>Proveedores Registrados</h4>
+                                                </f:facet>
+                                                <h:form id="frmMostrar">
+
+                                                      <b:dataTable value="#{proveedorController.proveedores}" var="prov" responsive="true" widgetVar="dtP" style="text-align: center">
+                                                            <b:dataTableColumn label="Proveedor" value="#{prov.proveedor}" style="text-align: center"/>
+                                                            <b:dataTableColumn label="Propietario" value="#{prov.propietario}" style="text-align: center"/>
+                                                            <b:dataTableColumn label="NIT" value="#{prov.nit}" style="text-align: center"/>
+                                                            <b:dataTableColumn label="DUI" value="#{prov.dui}" style="text-align: center"/>
+                                                            <b:dataTableColumn label="Dirección" value="#{prov.direccion}" style="text-align: center"/>
+
+                                                            <b:dataTableColumn label="Modificar" style="text-align: center;">
+
+                                                                  <p:commandButton  icon="ui-icon-pencil" onclick="$('#modalModificar').modal('show');" update="frmModificar" immediate="true" >
+                                                                        <f:setPropertyActionListener target="#{proveedorController.proveedor}" value="#{prov}" />
+                                                                  </p:commandButton>
+
+                                                            </b:dataTableColumn>
+                                                      </b:dataTable>
+                                                </h:form>
+                                          </b:panel>
+                                    </b:column>
+                              </b:panel>
+                        </b:container>
+
+                        <b:modal id="modalRegistrar" title="Registro de Proveedores" style="text-align: center" styleClass="modalPseudoClass" size="modal-lg" >
+                              <p:growl id="growlR" autoUpdate="false" severity="info, fatal" showSummary="true" showDetail="true"/>
+
+                              <h:form id="frmCrear">
+
+                                    <b:row>
+                                          <div class="col-lg-12" align="center">
+                                                <b:panel look="primary" collapsible="false" style="width: 75%;border-color: black;text-align: center">
+                                                      <f:facet name="heading">
+                                                            <h4>Datos del Proveedor</h4>
+                                                      </f:facet>
+                                                      <div class="panel-body" align="center">
+                                                            <h:panelGrid id="grid" columns="3" cellpadding="5" style="text-align:  center">
+
+                                                                  <p:outputLabel for="proveedor" value="Nombre del proveedor:" />
+
+                                                                  <p:inputText id="proveedor" class="form-control" value="#{proveedorController.proveedor.proveedor}" required="true" requiredMessage="Campo Requerido"/> 
+
+                                                                  <p:message for="proveedor" style="padding-left: 10px;"/>
+
+                                                                  <p:outputLabel/><p:outputLabel/><p:outputLabel/>
+
+                                                                  <p:outputLabel for="propietario" value="Nombre del propietario:"  />
+
+                                                                  <p:inputText id="propietario" class="form-control" value="#{proveedorController.proveedor.propietario}" required="true" requiredMessage="Campo Requerido"/> 
+
+                                                                  <p:message for="propietario" style="padding-left: 10px;"/>
+
+                                                                  <p:outputLabel/><p:outputLabel/><p:outputLabel/>
+
+                                                                  <p:outputLabel for="dui" value="DUI:" />
+
+                                                                  <p:inputText id="dui" class="form-control" value="#{proveedorController.proveedor.dui}" required="true" requiredMessage="Campo Requerido"/> 
+
+                                                                  <p:message for="dui" style="padding-left: 10px;"/>
+
+                                                                  <p:outputLabel/><p:outputLabel/><p:outputLabel/>
+                                                                  
+                                                                  <p:outputLabel for="nit" value="NIT:" />
+
+                                                                  <p:inputText id="nit" class="form-control" value="#{proveedorController.proveedor.nit}" required="true" requiredMessage="Campo Requerido"/> 
+
+                                                                  <p:message for="nit" style="padding-left: 10px;"/>
+
+                                                                  <p:outputLabel/><p:outputLabel/><p:outputLabel/>
+
+                                                                  <p:outputLabel for="dir" value="Dirección:"/>
+
+                                                                  <p:inputText id="dir" class="form-control" value="#{proveedorController.proveedor.direccion}" required="true" requiredMessage="Campo Requerido"/> 
+
+                                                                  <p:message for="dir" style="padding-left: 10px;"/>
+
+                                                                  <p:outputLabel/><p:outputLabel/><p:outputLabel/>    
+
+                                                                  <p:outputLabel for="tel" value="Teléfono:" />
+
+                                                                  <p:inputText id="tel" class="form-control" value="#{proveedorController.proveedor.telefono}" required="true" requiredMessage="Campo Requerido"/> 
+
+                                                                  <p:message for="tel" style="padding-left: 10px;"/>
+
+                                                                  <p:outputLabel/><p:outputLabel/><p:outputLabel/>       
+
+                                                            </h:panelGrid>
+                                                      </div>
+                                                </b:panel><!--Aqui termina el primer panel-->
+                                                <b:column col-md="5"></b:column>
+                                                <b:column col-md="3">
+                                                      <b:commandButton id="btnRegistrarP" update=":frmMostrar,grid,growlR" actionListener="#{proveedorController.registrar()}" value="Registrar" class="form-control" 
+                                                                       style="background-color:#D2D4D6;color: black;border-color: black;width:80%" 
+                                                                       action="ProveedorAdm.xhtml?faces-redirect=true"/>
+                                                </b:column>
+                                          </div>
+                                          <b:column col-lg="2"></b:column>
+                                    </b:row>
+                              </h:form>
+                              <f:facet name="footer">
+                                    <b:button value="Cerrar" dismiss="modal" />
+                              </f:facet>
+                        </b:modal>
+
+
+                        <b:modal id="modalModificar" title="Modificación de Proveedores" style="text-align: center" styleClass="modalPseudoClass" size="modal-lg" >
+                              <p:growl id="growlM" autoUpdate="false" severity="info, fatal" showSummary="true" showDetail="true"/>
+                              <h:form id="frmModificar">
+
+                                    <b:row>
+                                          <div class="col-lg-12" align="center">
+                                                <b:panel look="primary" collapsible="false" style="width: 75%;border-color: black;text-align: center">
+                                                      <f:facet name="heading">
+                                                            <h4>Datos del Proveedor</h4>
+                                                      </f:facet>
+                                                      <div class="panel-body" align="center">
+                                                            <h:panelGrid id="grid" columns="3" cellpadding="5" style="text-align:  center">
+
+                                                                  <p:outputLabel for="proveedor" value="Nombre del proveedor:" />
+
+                                                                  <p:inputText id="proveedor" class="form-control" value="#{proveedorController.proveedor.proveedor}" required="true" requiredMessage="Campo Requerido"/> 
+
+                                                                  <p:message for="proveedor" style="padding-left: 10px;"/>
+
+                                                                  <p:outputLabel/><p:outputLabel/><p:outputLabel/>
+
+                                                                  <p:outputLabel for="propietario" value="Nombre del propietario:"  />
+
+                                                                  <p:inputText id="propietario" class="form-control" value="#{proveedorController.proveedor.propietario}" required="true" requiredMessage="Campo Requerido"/> 
+
+                                                                  <p:message for="propietario" style="padding-left: 10px;"/>
+
+                                                                  <p:outputLabel/><p:outputLabel/><p:outputLabel/>
+
+                                                                  <p:outputLabel for="dui" value="DUI:" />
+
+                                                                  <p:inputText id="dui" class="form-control" value="#{proveedorController.proveedor.dui}" required="true" requiredMessage="Campo Requerido"/> 
+
+                                                                  <p:message for="dui" style="padding-left: 10px;"/>
+
+                                                                  <p:outputLabel/><p:outputLabel/><p:outputLabel/>
+                                                                  
+                                                                  <p:outputLabel for="nit" value="NIT:" />
+
+                                                                  <p:inputText id="nit" class="form-control" value="#{proveedorController.proveedor.nit}" required="true" requiredMessage="Campo Requerido"/> 
+
+                                                                  <p:message for="nit" style="padding-left: 10px;"/>
+
+                                                                  <p:outputLabel/><p:outputLabel/><p:outputLabel/>
+
+                                                                  <p:outputLabel for="dir" value="Dirección:"/>
+
+                                                                  <p:inputText id="dir" class="form-control" value="#{proveedorController.proveedor.direccion}" required="true" requiredMessage="Campo Requerido"/> 
+
+                                                                  <p:message for="dir" style="padding-left: 10px;"/>
+
+                                                                  <p:outputLabel/><p:outputLabel/><p:outputLabel/>    
+
+                                                                  <p:outputLabel for="tel" value="Teléfono:" />
+
+                                                                  <p:inputText id="tel" class="form-control" value="#{proveedorController.proveedor.telefono}" required="true" requiredMessage="Campo Requerido"/> 
+
+                                                                  <p:message for="tel" style="padding-left: 10px;"/>
+
+                                                                  <p:outputLabel/><p:outputLabel/><p:outputLabel/> 
+
+                                                            </h:panelGrid>
+                                                      </div>
+                                                </b:panel><!--Aqui termina el primer panel-->
+
+                                                <b:column col-md="5"></b:column>
+                                                <b:column col-md="3">
+
+                                                      <b:commandButton id="btnRegistrarP" update=":frmMostrar,grid,growlM" actionListener="#{proveedorController.modificar()}" value="Modificar" class="form-control" 
+                                                                       style="background-color:#D2D4D6;color: black;border-color: black;width:80%" 
+                                                                       action="ProveedorAdm.xhtml?faces-redirect=true"/>
+                                                </b:column>
+                                          </div>
+                                          <b:column col-lg="2"></b:column>
+                                    </b:row>
+
+                              </h:form>
+                              <f:facet name="footer">
+                                    <b:button value="Cerrar" dismiss="modal" />
+                              </f:facet>
+                        </b:modal>
+
+                  </ui:define>
+
+            </ui:composition>
+
+      </body>
+</html>

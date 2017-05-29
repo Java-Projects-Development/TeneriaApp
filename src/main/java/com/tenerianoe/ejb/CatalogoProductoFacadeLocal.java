@@ -5,29 +5,29 @@
  */
 package com.tenerianoe.ejb;
 
-import com.tenerianoe.model.CatalogoProducto;
+import com.tenerianoe.model.catalogo_producto;
 import java.util.List;
 import javax.ejb.Local;
 
 /**
  *
- * @author said
+ * @author admin
  */
 @Local
 public interface CatalogoProductoFacadeLocal {
 
-      void create(CatalogoProducto catalogoProducto);
+    void create(catalogo_producto catalogoProducto);
 
-      void edit(CatalogoProducto catalogoProducto);
+    void edit(catalogo_producto catalogoProducto);
 
-      void remove(CatalogoProducto catalogoProducto);
+    void remove(catalogo_producto catalogoProducto);
 
-      CatalogoProducto find(Object id);
+    catalogo_producto find(Object id);
 
-      List<CatalogoProducto> findAll();
+    List<catalogo_producto> findAll();
 
-      List<CatalogoProducto> findRange(int[] range);
+    List<catalogo_producto> findRange(int[] range);
 
-      int count();
-      
+    int count();
+    
 }

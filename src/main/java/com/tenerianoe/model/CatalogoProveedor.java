@@ -106,7 +106,27 @@ public class CatalogoProveedor implements Serializable {
         this.idCatalogoProveedor = idCatalogoProveedor;
     }
 
-    
+        @Override
+    public boolean equals(Object obj) {
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final CatalogoProveedor other = (CatalogoProveedor) obj;
+        if (this.idCatalogoProveedor != other.idCatalogoProveedor) {
+            return false;
+        }
+        return true;
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 7;
+        hash = 37 * hash + this.idCatalogoProveedor;
+        return hash;
+    }
 
     @Override
     public String toString() {

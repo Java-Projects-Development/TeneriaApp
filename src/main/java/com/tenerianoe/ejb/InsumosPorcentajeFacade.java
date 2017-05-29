@@ -5,7 +5,7 @@
  */
 package com.tenerianoe.ejb;
 
-import com.tenerianoe.model.catalogo_producto;
+import com.tenerianoe.model.InsumosPorcentaje;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -15,7 +15,7 @@ import javax.persistence.PersistenceContext;
  * @author admin
  */
 @Stateless
-public class CatalogoProductoFacade extends AbstractFacade<catalogo_producto> implements CatalogoProductoFacadeLocal {
+public class InsumosPorcentajeFacade extends AbstractFacade<InsumosPorcentaje> implements InsumosPorcentajeFacadeLocal {
 
     @PersistenceContext(unitName = "com.mycompany_TeneriaApp_war_1.0-SNAPSHOTPU")
     private EntityManager em;
@@ -25,8 +25,8 @@ public class CatalogoProductoFacade extends AbstractFacade<catalogo_producto> im
         return em;
     }
 
-    public CatalogoProductoFacade() {
-        super(catalogo_producto.class);
+    public InsumosPorcentajeFacade() {
+        super(InsumosPorcentaje.class);
     }
     
 }

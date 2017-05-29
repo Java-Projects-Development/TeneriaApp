@@ -5,6 +5,8 @@ import com.tenerianoe.ejb.UsuarioFacadeLocal;
 import com.tenerianoe.model.Persona;
 import com.tenerianoe.model.Usuario;
 import java.io.Serializable;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
@@ -48,7 +50,7 @@ public class UsuarioController implements Serializable {
         try {
             this.usuario.setId_usuario(persona);
             usuarioEJB.create(usuario);
-            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Aviso", "Usuario registrado correctamente"));
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Aviso", "Usuario registrado con éxito"));
             FacesContext context = FacesContext.getCurrentInstance();
             context.getExternalContext().getFlash().setKeepMessages(true);
 
@@ -59,8 +61,7 @@ public class UsuarioController implements Serializable {
 
     public void modificar() {
         try {
-            this.usuario.setId_usuario(persona);
-            usuarioEJB.edit(usuario);
+            personaEJB.edit(persona);
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Aviso", "Usuario modificado con éxito"));
             FacesContext context = FacesContext.getCurrentInstance();
             context.getExternalContext().getFlash().setKeepMessages(true);
@@ -107,4 +108,6 @@ public class UsuarioController implements Serializable {
         this.persona = new Persona();
         this.usuario = new Usuario();
     }
+
+
 }

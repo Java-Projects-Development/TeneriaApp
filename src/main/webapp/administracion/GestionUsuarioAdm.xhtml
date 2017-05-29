@@ -7,669 +7,325 @@
       xmlns:f="http://xmlns.jcp.org/jsf/core"
       xmlns:b="http://bootsfaces.net/ui">
 
-    <body>
+    <h:body>
 
         <ui:composition template="./../plantillas/mpAdmin.xhtml">
 
             <ui:define name="content">
                 <!--Aca ira todo el contenido-->
-                <div class="container" id="todo">
+                <b:container>
 
-                    <div class="row">
+                    <b:panel collapsible="false" look="primary" 
+                             style="text-align: center;border-color: black;">
+                        <f:facet name="heading">
+                            <h4>Gestión de Usuarios</h4>
+                        </f:facet>
+                        <div class="col-lg-12" >
+                            <br/>
+                            <b:column col-md="4"></b:column >
+                            <b:column col-md="4" style="padding-left:55px">
+                                <h:commandButton class="form-control" value="Crear Usuario" onclick="$('#modalRegistrar').modal('show');" style="background-color:#D2D4D6;color: black;border-color: black" immediate="true" />
+                            </b:column >
 
-                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                            <div class="panel panel-primary" style="border-color: black">
-                                <div class="panel-body" >
-                                    <div class="row">
-                                        <div class="col-lg-1"></div>      
-                                        <div class="col-lg-10" >
-                                            <br />
-                                            <div class="form-group">
+                            <br/><br/><br/>
+                            <b:panel look="primary" collapsible="false" style="border-color: black;text-align: center">
+                                <f:facet name="heading">
+                                    <h4>Usuarios Registrados</h4>
+                                </f:facet>
+                                <h:form id="frmMostrar">
+                                    <b:dataTable value="#{usuarioController.personas}" var="per" responsive="true" widgetVar="dtU" style="text-align: center">
+                                        <b:dataTableColumn label="Nombres" value="#{per.nombres}" style="text-align: center"/>
+                                        <b:dataTableColumn label="Apellidos" value="#{per.apellidos}" style="text-align: center"/>
+                                        <b:dataTableColumn label="Sexo" value="#{per.sexo}" style="text-align: center"/>
+                                        <b:dataTableColumn label="DUI" value="#{per.dui}" style="text-align: center"/>
+                                        <b:dataTableColumn label="NIT" value="#{per.nit}" style="text-align: center"/>
+                                        <b:dataTableColumn label="Dirección" value="#{per.direccion}" style="text-align: center"/>
+                                        <b:dataTableColumn label="Teléfono" value="#{per.telefono}" style="text-align: center"/>
+                                        <b:dataTableColumn label="Modificar" style="text-align: center;">
 
+                                            <p:commandButton icon="ui-icon-pencil"
+                                                             onclick="$('#modalModificar').modal('show');"  update="frmModificar" immediate="true">
+                                                <f:setPropertyActionListener target="#{usuarioController.persona}" value="#{per}" />
 
-                                                <!--<div class="panel panel-primary" style="border-color: black;"/>Separator parte de arriba-->
+                                            </p:commandButton>
 
-                                                <div class="row">
+                                        </b:dataTableColumn>
 
-
-
-                                                    <div class="panel panel-primary" style="border-color: black">
-                                                        <div class="panel-heading" style="border-color: black;text-align: center;background-color:#04536C;color: white"><h4>Gestión de Usuarios</h4></div>
-                                                        <div class="panel-body">
-                                                            <div class="form-group">
-
-                                                                <div class="col-md-4"></div>
-                                                                <div class="col-md-4">
-
-                                                                    <button type="button" class="form-control" data-toggle="modal" data-target="#modalUsuarios" style="background-color:#D2D4D6;color: black;border-color: black">
-                                                                        <p:ajax event="click" listener="#{usuarioController.limpiarModal()}"/>
-                                                                        Crear Usuario
-                                                                    </button>
-                                                                </div>
-                                                            </div>
-                                                            <br/><br/>
-                                                            <div class="col-md-12">
-                                                                <div class="panel panel-primary" style="border-color: black" id="panelDT">
-                                                                    <div class="panel-heading" style="border-color: black;text-align: center;background-color:#04536C;color: white"><h4>Usuarios Registrados</h4></div>
-                                                                    <div class="panel-body">
-
-
-                                                                        <h:form id="frmMostrar">
-                                                                            <b:dataTable value="#{usuarioController.usuarios}" var="usu" responsive="true" widgetVar="dtU" style="text-align: center">
-                                                                                <b:dataTableColumn label="Usuario" value="#{usu.usuario}" style="text-align: center"/>
-                                                                                <b:dataTableColumn label="Tipo de Usuario" value="#{usu.tipo_usuario}" style="text-align: center"/>
-                                                                                <b:dataTableColumn label="Estado" value="#{usu.estado}" style="text-align: center"/>
-                                                                                <b:dataTableColumn label="Modificar" style="text-align: center;">
-
-                                                                                    <!--                                                                                    <p:commandButton icon="ui-icon-pencil"
-                                                                                                                                                                                         oncomplete="PF('dlgModificar').show();">
-                                                                                                                                                                            <f:setPropertyActionListener target="#{usuarioController.usuario}" value="#{usuario}" />
-                                                                                    
-                                                                                                                                                                        </p:commandButton>-->
-
-
-                                                                                    <button type="button" icon="edit" class="form-control" 
-                                                                                            data-toggle="modal" data-target="#modificarUModal"
-                                                                                            style="background-color:#D2D4D6;color: black;border-color: black"> 
-                                                                                        Modificar
-
-                                                                                    </button>
-
-
-                                                                                </b:dataTableColumn>
-
-                                                                            </b:dataTable>
-                                                                        </h:form>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="col-md-2"></div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+                                    </b:dataTable>
+                                </h:form>
+                            </b:panel>
                         </div>
-                    </div>
-                </div>
-
-                <!--Este es el dialogo para crear usuario -->
-                <h:form id="frmUsuariosModal">
-                    <p:growl id="mensaje" autoUpdate="false" severity="info, fatal" showSummary="true" showDetail="true"/>
-                    <div id="modalUsuarios" class="modal fade" role="dialog">
-                        <div class="modal-dialog modal-lg">
-
-                            <!-- Modal content-->
-                            <div class="modal-content">
-                                <div class="modal-header" style="border-color: black;background-color: #D2D4D6;">
-                                    <button type="button" class="close" data-dismiss="modal">&times;</button>
-                                    <h3 class="modal-title" style="text-align: center">Creación de Nuevo Usuario</h3>
-                                </div>
-                                <div class="modal-body" style="border-color: black">
-                                    <div class="container" style="border-color: black">
-                                        <br/>
+                    </b:panel>
 
 
-                                        <div class="row">
-                                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                                                <div class="row">
-                                                    <div class="col-lg-1"></div>
-                                                    <div class="col-lg-10">
-                                                        <div class="form-group">
-                                                            <div class="row">
-
-                                                                <div class="panel panel-primary" style="width: 68%;border-color: black;">
-                                                                    <div class="panel-heading" style="border-color: black;text-align: center;background-color: #04536C">Datos Personales</div>
-                                                                    <div class="panel-body" align="center">
-                                                                        <h:panelGrid id="grid" columns="3" cellpadding="5">
-
-                                                                            <p:outputLabel for="nombres" value="Nombres:" />
-
-                                                                            <p:inputText id="nombres" class="form-control" value="#{usuarioController.persona.nombres}" required="true" requiredMessage="Campo Requerido"/> 
-
-                                                                            <p:message for="nombres" style="padding-left: 10px;"/>
-
-                                                                            <p:outputLabel/><p:outputLabel/><p:outputLabel/>
-
-                                                                            <p:outputLabel for="apellidos" value="Apellidos:"  />
-
-                                                                            <p:inputText id="apellidos" class="form-control" value="#{usuarioController.persona.apellidos}" required="true" requiredMessage="Campo Requerido"/> 
-
-                                                                            <p:message for="apellidos" style="padding-left: 10px;"/>
-
-                                                                            <p:outputLabel/><p:outputLabel/><p:outputLabel/>
-
-                                                                            <p:outputLabel for="sexo" value="Sexo:" />
-
-                                                                            <h:selectOneMenu value="#{usuarioController.persona.sexo}" id="sexo" class="form-control">
-
-                                                                                <f:selectItem itemLabel="Masculino" itemValue="M"/>
-                                                                                <f:selectItem itemLabel="Femenino" itemValue="F"/>
-                                                                            </h:selectOneMenu>
-
-                                                                            <p:message for="sexo" style="padding-left: 10px;"/>
-                                                                            <p:outputLabel/><p:outputLabel/><p:outputLabel/>
-
-                                                                            <p:outputLabel for="dui" value="DUI:"/>
-
-                                                                            <p:inputText id="dui" class="form-control" value="#{usuarioController.persona.dui}" required="true" requiredMessage="Campo Requerido"/> 
-
-                                                                            <p:message for="dui" style="padding-left: 10px;"/>
-
-                                                                            <p:outputLabel/><p:outputLabel/><p:outputLabel/>      
-
-                                                                            <p:outputLabel for="nit" value="NIT:" />
-
-                                                                            <p:inputText id="nit" class="form-control" value="#{usuarioController.persona.nit}" required="true" requiredMessage="Campo Requerido"/> 
-
-                                                                            <p:message for="nit" style="padding-left: 10px;"/>
-
-                                                                            <p:outputLabel/><p:outputLabel/><p:outputLabel/>    
-
-
-                                                                            <p:outputLabel for="fechaNac" value="Fecha Nac. :"  style="padding-right: 60px"/>
-
-                                                                            <p:inputText id="fechaNac" class="form-control" value="#{usuarioController.persona.fechaNacimiento}" required="false" requiredMessage="Campo Requerido"/> 
-
-                                                                            <p:message for="fechaNac" style="padding-left: 10px;"/>
-
-                                                                            <p:outputLabel/><p:outputLabel/><p:outputLabel/>    
-
-                                                                            <p:outputLabel for="direccion" value="Dirección:" />
-
-                                                                            <p:inputText id="direccion" class="form-control" value="#{usuarioController.persona.direccion}" required="true" requiredMessage="Campo Requerido"/> 
-
-                                                                            <p:message for="direccion" style="padding-left: 10px;"/>
-
-                                                                            <p:outputLabel/><p:outputLabel/><p:outputLabel/>    
-
-                                                                            <p:outputLabel for="telefono" value="Teléfono:"  />
-
-                                                                            <p:inputText id="telefono" class="form-control" value="#{usuarioController.persona.telefono}" required="true" requiredMessage="Campo Requerido"/> 
-
-                                                                            <p:message for="telefono" style="padding-left: 10px;"/>
-
-                                                                            <p:outputLabel/><p:outputLabel/><p:outputLabel/>    
-
-                                                                        </h:panelGrid>
-                                                                    </div>
-                                                                </div><!--Aqui termina el primer panel-->
-
-                                                                <!--Este el otro panel-->
-
-                                                                <div class="panel panel-primary" style="width: 68%;border-color: black">
-                                                                    <div class="panel-heading" style="border-color: black;text-align: center;background-color: #04536C">Datos para Cuentas de Usuario</div>
-                                                                    <div class="panel-body" align="center">
-                                                                        <h:panelGrid id="grid2" columns="3" cellpadding="5">
-
-                                                                            <p:outputLabel/><p:outputLabel/><p:outputLabel/> 
-                                                                            <p:outputLabel for="tipoU" value="Tipo de Usuario:"  />
-
-
-                                                                            <h:selectOneMenu value="#{usuarioController.usuario.tipo_usuario}" id="tipoU" class="form-control">
-                                                                                <f:selectItem itemLabel="Administrador" itemValue="A"/>
-                                                                                <f:selectItem itemLabel="Operario" itemValue="O"/>
-                                                                            </h:selectOneMenu>
-
-
-                                                                            <p:message for="tipoU" style="padding-left: 10px;"/>
-
-                                                                            <p:outputLabel/><p:outputLabel/><p:outputLabel/>  
+                </b:container>
 
 
 
-                                                                            <p:outputLabel for="usuario" value="Usuario:"  />
+                <b:modal id="modalRegistrar" title="Registro de Usuarios" style="text-align: center" styleClass="modalPseudoClass" size="modal-lg" >
+                    <p:growl id="growlR" autoUpdate="false" severity="info, fatal" showSummary="true" showDetail="true"/>
+                    <h:form id="frmCrear">
 
-                                                                            <p:inputText id="usuario" class="form-control" value="#{usuarioController.usuario.usuario}" required="true" requiredMessage="Campo Requerido"/> 
+                        <b:row>
+                            <div class="col-lg-12" align="center">
+                                <b:panel look="primary" collapsible="false" style="width: 75%;border-color: black;text-align: center">
+                                    <f:facet name="heading">
+                                        <h4>Creación de Usuarios</h4>
+                                    </f:facet>
+                                    <div class="panel-body" align="center">
+                                        <h:panelGrid id="grid" columns="3" cellpadding="5" style="text-align:  center">
 
-                                                                            <p:message for="usuario" style="padding-left: 10px;"/>
+                                            <p:outputLabel for="nombres" value="Nombres:" />
 
-                                                                            <p:outputLabel/><p:outputLabel/><p:outputLabel/> 
+                                            <p:inputText id="nombres" class="form-control" value="#{usuarioController.persona.nombres}" required="true" requiredMessage="Campo Requerido"/> 
+
+                                            <p:message for="nombres" style="padding-left: 10px;"/>
+
+                                            <p:outputLabel/><p:outputLabel/><p:outputLabel/>
+
+                                            <p:outputLabel for="apellidos" value="Apellidos:"  />
+
+                                            <p:inputText id="apellidos" class="form-control" value="#{usuarioController.persona.apellidos}" required="true" requiredMessage="Campo Requerido"/> 
+
+                                            <p:message for="apellidos" style="padding-left: 10px;"/>
+
+                                            <p:outputLabel/><p:outputLabel/><p:outputLabel/>
+
+                                            <p:outputLabel for="sexo" value="Sexo:" />
+
+                                            <h:selectOneMenu value="#{usuarioController.persona.sexo}" id="sexo" class="form-control">
+                                                <f:selectItem itemLabel="----Seleccione----" noSelectionOption="true"/>
+                                                <f:selectItem itemLabel="Masculino" itemValue="M"/>
+                                                <f:selectItem itemLabel="Femenino" itemValue="F"/>
+                                            </h:selectOneMenu>
+
+                                            <p:message for="sexo" style="padding-left: 10px;"/>
+                                            <p:outputLabel/><p:outputLabel/><p:outputLabel/>
+
+                                            <p:outputLabel for="dui" value="DUI:"/>
+
+                                            <p:inputMask mask="99999999-9" id="dui" class="form-control" value="#{usuarioController.persona.dui}" required="true" requiredMessage="Campo Requerido"/> 
+
+                                            <p:message for="dui" style="padding-left: 10px;"/>
+
+                                            <p:outputLabel/><p:outputLabel/><p:outputLabel/>      
+
+                                            <p:outputLabel for="nit" value="NIT:" />
+
+                                            <p:inputMask mask="9999-999999-999-9" id="nit" class="form-control" value="#{usuarioController.persona.nit}" required="true" requiredMessage="Campo Requerido"/> 
+
+                                            <p:message for="nit" style="padding-left: 10px;"/>
+
+                                            <p:outputLabel/><p:outputLabel/><p:outputLabel/>    
+
+
+                                            <h:outputLabel for="fechaNac" value="Fecha Nac. :"  style="padding-right: 60px"/>
+
+                                            <p:calendar id="fechaNac" showOn="button" value="#{usuarioController.persona.fechaNacimiento}" locale="es" yearRange="c-100:c+100" navigator="true" pattern="dd/MM/yyyy" />
+
+                                            <p:message for="fechaNac" style="padding-left: 10px;"/>
+
+                                            <h:outputLabel/><p:outputLabel/><p:outputLabel/>    
+
+                                            <p:outputLabel for="direccion" value="Dirección:" />
+
+                                            <p:inputText id="direccion" class="form-control" value="#{usuarioController.persona.direccion}" required="true" requiredMessage="Campo Requerido"/> 
+
+                                            <p:message for="direccion" style="padding-left: 10px;"/>
+
+                                            <p:outputLabel/><p:outputLabel/><p:outputLabel/>    
+
+                                            <p:outputLabel for="telefono" value="Teléfono:"  />
+
+                                            <p:inputMask mask="9999-9999" id="telefono" class="form-control" value="#{usuarioController.persona.telefono}" required="true" requiredMessage="Campo Requerido"/> 
+
+                                            <p:message for="telefono" style="padding-left: 10px;"/>
 
 
 
-                                                                            <p:outputLabel for="clave1" value="Contraseña:" />
-                                                                            <p:password id="clave1" value="#{usuarioController.usuario.clave}" 
-                                                                                        match="clave2" feedback="true" validatorMessage="Las claves no coinciden"
-                                                                                        weakLabel="Debil" strongLabel="Fuerte" goodLabel="Bueno" 
-                                                                                        promptLabel="Ingrese una Clave" required="true" requiredMessage="Campo Requerido" inline="true"  class="form-control"/>
-                                                                            <p:message for="clave1"/>
-
-                                                                            <p:outputLabel/><p:outputLabel/><p:outputLabel/> 
-
-                                                                            <p:outputLabel for="clave2" value="Repetir Contraseña:" style="padding-right: 40px"/>
-                                                                            <p:password id="clave2"  required="true" requiredMessage="Campo Requerido" inline="true" class="form-control"/>
-                                                                            <p:message for="clave2"/>
-                                                                            <p:outputLabel/><p:outputLabel/><p:outputLabel/>
-                                                                        </h:panelGrid>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                            <div class ="col-md-3" style=""></div>
-                                                            <div class="col-md-3" >
-                                                                <b:commandButton id="btnRegistrarU" update=":frmMostrar,mensaje,grid,grid2" actionListener="#{usuarioController.registrar()}" value="Registrar" class="form-control" 
-                                                                                 style="background-color:#D2D4D6;color: black;border-color: black;width:85%" 
-                                                                                 action="GestionUsuarioAdm.xhtml?faces-redirect=true">
-
-                                                                </b:commandButton>
-
-                                                            </div>
-                                                            <div class="col-md-6"></div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
+                                        </h:panelGrid>
                                     </div>
-                                </div>
-                                <div class="modal-footer" align="center" style="border-color: black;text-align: right">
-                                    <button type="button" class="btn btn-primary" data-dismiss="modal">Cerrar</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </h:form><!--aqui acaba el dialogo para crear usuario-->
 
-                <!--Este es el dialogo para modificar usuario -->
-                <h:form id="frmModificarUModal">
-                    <p:growl id="mensaje" autoUpdate="false" severity="info, fatal" showSummary="true" showDetail="true"/>
-                    <div id="modificarUModal" class="modal fade" role="dialog">
-                        <div class="modal-dialog modal-lg">
+                                </b:panel><!--Aqui termina el primer panel-->
 
-                            <!-- Modal content-->
-                            <div class="modal-content">
-                                <div class="modal-header" style="border-color: black;background-color: #D2D4D6;">
-                                    <button type="button" class="close" data-dismiss="modal">&times;</button>
-                                    <h3 class="modal-title" style="text-align: center">Modificar Usuario</h3>
-                                </div>
-                                <div class="modal-body" style="border-color: black">
-                                    <div class="container">
-                                        <br/>
+                                <!--Este el otro panel-->
+
+                                <b:panel look="primary" collapsible="false" style="width: 75%;border-color: black;text-align: center">
+                                    <f:facet name="heading">
+                                        <h4>Datos para Cuenta de Usuario</h4>
+                                    </f:facet>
+                                    <div class="panel-body" align="center">
+                                        <h:panelGrid id="grid2" columns="3" cellpadding="5">
+
+                                            <p:outputLabel/><p:outputLabel/><p:outputLabel/> 
+                                            <p:outputLabel for="tipoU" value="Tipo de Usuario:"  />
 
 
-                                        <div class="row">
-                                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                                                <div class="row">
-                                                    <div class="col-lg-1"></div>
-                                                    <div class="col-lg-10">
-                                                        <div class="form-group">
-                                                            <div class="row">
-
-                                                                <div class="panel panel-primary" style="width: 68%;border-color: black;">
-                                                                    <div class="panel-heading" style="border-color: black;text-align: center;background-color: #04536C">Datos Personales</div>
-                                                                    <div class="panel-body">
-
-                                                                        <div class="col-md-4 col-xs-12" style="text-align: right;padding-top: 5px;"><!--Nombres-->
-                                                                            Nombres:
-                                                                        </div>
-
-                                                                        <div class="col-md-5 col-xs-12">
-                                                                            <h:inputText id="nombresU" class="form-control" value="#{usuarioController.persona.nombres}" style=""/> 
-
-                                                                        </div>
-                                                                        <br/><br/>      
-
-                                                                        <div class="col-md-4 col-xs-12" style="text-align: right;padding-top: 5px;"><!--Apellidos-->
-                                                                            Apellidos:
-                                                                        </div>
-
-                                                                        <div class="col-md-5 col-xs-12">
-                                                                            <h:inputText id="apellidosU" class="form-control" value="#{usuarioController.persona.apellidos}" style=""/> 
-
-                                                                        </div>
-                                                                        <br/><br/>    
-
-                                                                        <b:formGroup>      
-                                                                            <div class="col-md-4 col-xs-12" style="text-align: right;padding-top: 5px;">
-                                                                                Sexo:
-                                                                            </div>
-
-                                                                            <div class="col-md-5 col-xs-12">
-
-                                                                                <b:selectOneMenu value="#{usuarioController.persona.sexo}" >
-
-                                                                                    <f:selectItem itemLabel="Masculino" itemValue="M"/>
-                                                                                    <f:selectItem itemLabel="Femenino" itemValue="F"/>
-                                                                                </b:selectOneMenu>
-                                                                            </div>
-                                                                            <br/><br/>
-                                                                        </b:formGroup> 
+                                            <h:selectOneMenu value="#{usuarioController.usuario.tipo_usuario}" id="tipoU" class="form-control">
+                                                <f:selectItem itemLabel="----Seleccione----" noSelectionOption="true"/>
+                                                <f:selectItem itemLabel="Administrador" itemValue="A"/>
+                                                <f:selectItem itemLabel="Operario" itemValue="O"/>
+                                            </h:selectOneMenu>
 
 
-                                                                        <div class="col-md-4 col-xs-12" style="text-align: right;padding-top: 5px"><!--DUI-->
-                                                                            DUI:
-                                                                        </div>
+                                            <p:message for="tipoU" style="padding-left: 10px;"/>
 
-                                                                        <div class="col-md-5 col-xs-12">
-                                                                            <h:inputText id="DUIU" value="#{usuarioController.persona.dui}" class="form-control"/>
+                                            <p:outputLabel/><p:outputLabel/><p:outputLabel/>  
 
-                                                                        </div>
+                                            <p:outputLabel for="usuario" value="Usuario:"  />
 
-                                                                        <br/><br/>        
+                                            <p:inputText id="usuario" class="form-control" value="#{usuarioController.usuario.usuario}" required="true" requiredMessage="Campo Requerido"/> 
 
-                                                                        <div class="col-md-4 col-xs-12" style="text-align: right;padding-top: 5px;"><!--NIT-->
-                                                                            NIT:
-                                                                        </div>
+                                            <p:message for="usuario" style="padding-left: 10px;"/>
 
-                                                                        <div class="col-md-5 col-xs-12">
-                                                                            <h:inputText id="NITU" value="#{usuarioController.persona.nit}" class="form-control"/>
-
-                                                                        </div>
-
-                                                                        <br/><br/>    
-
-                                                                        <div class="col-md-4 col-xs-12" style="text-align: right;padding-top: 5px;"><!--Direccion-->
-                                                                            Fecha Nac.:
-                                                                        </div>
-
-                                                                        <div class="col-md-5 col-xs-12">
-                                                                            <h:inputText id="fechaNac" value="#{usuarioController.persona.dui}" class="form-control"/>
-
-                                                                        </div>
-                                                                        <br/><br/>  
-
-                                                                        <div class="col-md-4 col-xs-12" style="text-align: right;padding-top: 5px;"><!--Direccion-->
-                                                                            Dirección:
-                                                                        </div>
-
-                                                                        <div class="col-md-5 col-xs-12">
-                                                                            <h:inputText id="DirU" value="#{usuarioController.persona.direccion}" class="form-control"/>
-
-                                                                        </div>
-
-                                                                        <br/><br/>    
-
-                                                                        <div class="col-md-4 col-xs-12" style="text-align: right;padding-top: 5px;"><!--Teléfono-->
-                                                                            Teléfono:
-                                                                        </div>
-
-                                                                        <div class="col-md-5 col-xs-12">
-                                                                            <h:inputText id="TelU" value="#{usuarioController.persona.telefono}" class="form-control"/>
-
-                                                                        </div>
-
-                                                                        <br/><br/>   
-
-
-                                                                    </div>
-                                                                </div><!--Aqui termina el primer panel-->
-
-                                                                <!--Este el otro panel-->
-
-                                                                <div class="panel panel-primary" style="width: 68%;border-color: black">
-                                                                    <div class="panel-heading" style="border-color: black;text-align: center;background-color: #04536C">Datos para Cuentas de Usuario</div>
-                                                                    <div class="panel-body">
-                                                                        <b:formGroup>
-                                                                            <div class="col-md-4 col-xs-12" style="text-align: right;padding-top: 5px;"><!--Tipo de Cuenta-->
-                                                                                Tipo de cuenta:
-                                                                            </div>
-
-                                                                            <div class="col-md-5 col-xs-12">
-                                                                                <b:selectOneMenu value="#{usuarioController.usuario.tipo_usuario}">
-                                                                                    <f:selectItem itemLabel="Administrador" itemValue="A"/>
-                                                                                    <f:selectItem itemLabel="Operario" itemValue="O"/>
-                                                                                </b:selectOneMenu>
-
-                                                                            </div>
-                                                                            <br/><br/>
-                                                                        </b:formGroup>
-
-
-                                                                        <div class="col-md-4 col-xs-12" style="text-align: right;padding-top: 5px;"><!--Usuario-->
-                                                                            Usuario:
-                                                                        </div>
-
-                                                                        <div class="col-md-5 col-xs-12">
-                                                                            <h:inputText id="UsuarioU" class="form-control" value="#{usuarioController.usuario.usuario}" style=""/> 
-                                                                        </div>
-                                                                        <br/><br/>
+                                            <p:outputLabel/><p:outputLabel/><p:outputLabel/> 
 
 
 
-                                                                        <div class="col-md-4 col-xs-12" style="text-align: right;padding-top: 5px;"><!--Contraseña-->
-                                                                            Contraseña:
-                                                                        </div>
+                                            <p:outputLabel for="clave1" value="Contraseña:" />
+                                            <p:password id="clave1" value="#{usuarioController.usuario.clave}" 
+                                                        match="clave2" feedback="true" validatorMessage="Las claves no coinciden"
+                                                        weakLabel="Debil" strongLabel="Fuerte" goodLabel="Bueno" 
+                                                        promptLabel="Ingrese una Clave" required="true" requiredMessage="Campo Requerido" inline="true"  class="form-control"/>
+                                            <p:message for="clave1"/>
 
-                                                                        <div class="col-md-5 col-xs-12">
-                                                                            <h:inputText id="ContraU" class="form-control" value="#{usuarioController.usuario.clave}" style=""/> 
+                                            <p:outputLabel/><p:outputLabel/><p:outputLabel/> 
 
-                                                                        </div>
-                                                                        <br/><br/>
+                                            <p:outputLabel for="clave2" value="Repetir Contraseña:" style="padding-right: 40px"/>
+                                            <p:password id="clave2"  required="true" requiredMessage="Campo Requerido" inline="true" class="form-control"/>
+                                            <p:message for="clave2"/>
 
-                                                                        <div class="col-md-4 col-xs-12" style="text-align: right;padding-top: 5px;"><!--Repetir Contra-->
-                                                                            Repetir Contraseña:
-                                                                        </div>
-
-                                                                        <div class="col-md-5 col-xs-12">
-                                                                            <h:inputText id="RepetirContraU" class="form-control"/> 
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-
-
-                                                            </div>
-                                                            <div class ="col-md-3" style=""></div>
-                                                            <div class="col-md-3" >
-                                                                <b:commandButton id="btnRegistrarU" update=":frmMostrar,mensaje" actionListener="#{usuarioController.modificar()}" value="Modificar" class="form-control" 
-                                                                                 style="background-color:#D2D4D6;color: black;border-color: black;width:85%" 
-                                                                                 action="GestionUsuarioAdm.xhtml?faces-redirect=true">
-
-                                                                </b:commandButton>
-
-                                                            </div>
-                                                            <div class="col-md-6"></div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
+                                        </h:panelGrid>
                                     </div>
-                                </div>
-                                <div class="modal-footer" align="center" style="border-color: black;text-align: right">
-                                    <button type="button" class="btn btn-primary" data-dismiss="modal">Cerrar</button>
-                                </div>
+                                </b:panel>
+
+                                <b:column col-md="5"></b:column>
+                                <b:column col-md="3">
+
+                                    <b:commandButton id="btnRegistrarU" update=":frmMostrar,grid,grid2,growlR" actionListener="#{usuarioController.registrar()}" value="Registrar" class="form-control" 
+                                                     style="background-color:#D2D4D6;color: black;border-color: black;width:80%" 
+                                                     action="GestionUsuarioAdm.xhtml?faces-redirect=true"/>
+                                </b:column>
                             </div>
-                        </div>
-                    </div>
-                </h:form>
-                <!--aqui acaba el dialogo para modificar usuario-->
+                            <b:column col-lg="2"></b:column>
+                        </b:row>
 
-
-
-
-                <p:dialog id="dlgModificar" header="Modificar Usuario" showEffect="fade" hideEffect="fade"
-                          widgetVar="dlgModificar" closable="true" modal="true" draggable="false" resizable="false" minWidth="600">
-
-                    <h:form id="frmModificar">
-                        <p:growl id="mensaje" autoUpdate="false" severity="info, fatal" showSummary="true" showDetail="true"/>
-                        <br/>
-                        <div class="row">
-                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                                <div class="row">
-                                    <div class="col-lg-1"></div>
-                                    <div class="col-lg-10">
-                                        <div class="form-group">
-                                            <div class="row">
-
-                                                <div class="panel panel-primary" style="width: 68%;border-color: black;">
-                                                    <div class="panel-heading" style="border-color: black;text-align: center;background-color: #04536C">Datos Personales</div>
-                                                    <div class="panel-body">
-
-                                                        <div class="col-md-4 col-xs-12" style="text-align: right;padding-top: 5px;"><!--Nombres-->
-                                                            Nombres:
-                                                        </div>
-
-                                                        <div class="col-md-5 col-xs-12">
-                                                            <h:inputText id="nombresU" class="form-control" value="#{usuarioController.persona.nombres}" style=""/> 
-
-                                                        </div>
-                                                        <br/><br/>      
-
-                                                        <div class="col-md-4 col-xs-12" style="text-align: right;padding-top: 5px;"><!--Apellidos-->
-                                                            Apellidos:
-                                                        </div>
-
-                                                        <div class="col-md-5 col-xs-12">
-                                                            <h:inputText id="apellidosU" class="form-control" value="#{usuarioController.persona.apellidos}" style=""/> 
-
-                                                        </div>
-                                                        <br/><br/>    
-
-                                                        <b:formGroup>      
-                                                            <div class="col-md-4 col-xs-12" style="text-align: right;padding-top: 5px;">
-                                                                Sexo:
-                                                            </div>
-
-                                                            <div class="col-md-5 col-xs-12">
-
-                                                                <b:selectOneMenu value="#{usuarioController.persona.sexo}" >
-
-                                                                    <f:selectItem itemLabel="Masculino" itemValue="M"/>
-                                                                    <f:selectItem itemLabel="Femenino" itemValue="F"/>
-                                                                </b:selectOneMenu>
-                                                            </div>
-                                                            <br/><br/>
-                                                        </b:formGroup> 
-
-
-                                                        <div class="col-md-4 col-xs-12" style="text-align: right;padding-top: 5px"><!--DUI-->
-                                                            DUI:
-                                                        </div>
-
-                                                        <div class="col-md-5 col-xs-12">
-                                                            <h:inputText id="DUIU" value="#{usuarioController.persona.dui}" class="form-control"/>
-
-                                                        </div>
-
-                                                        <br/><br/>        
-
-                                                        <div class="col-md-4 col-xs-12" style="text-align: right;padding-top: 5px;"><!--NIT-->
-                                                            NIT:
-                                                        </div>
-
-                                                        <div class="col-md-5 col-xs-12">
-                                                            <h:inputText id="NITU" value="#{usuarioController.persona.nit}" class="form-control"/>
-
-                                                        </div>
-
-                                                        <br/><br/>    
-
-                                                        <div class="col-md-4 col-xs-12" style="text-align: right;padding-top: 5px;"><!--Direccion-->
-                                                            Fecha Nac.:
-                                                        </div>
-
-                                                        <div class="col-md-5 col-xs-12">
-                                                            <h:inputText id="fechaNac" value="#{usuarioController.persona.dui}" class="form-control"/>
-
-                                                        </div>
-                                                        <br/><br/>  
-
-                                                        <div class="col-md-4 col-xs-12" style="text-align: right;padding-top: 5px;"><!--Direccion-->
-                                                            Dirección:
-                                                        </div>
-
-                                                        <div class="col-md-5 col-xs-12">
-                                                            <h:inputText id="DirU" value="#{usuarioController.persona.direccion}" class="form-control"/>
-
-                                                        </div>
-
-                                                        <br/><br/>    
-
-                                                        <div class="col-md-4 col-xs-12" style="text-align: right;padding-top: 5px;"><!--Teléfono-->
-                                                            Teléfono:
-                                                        </div>
-
-                                                        <div class="col-md-5 col-xs-12">
-                                                            <h:inputText id="TelU" value="#{usuarioController.persona.telefono}" class="form-control"/>
-
-                                                        </div>
-
-                                                        <br/><br/>   
-
-
-                                                    </div>
-                                                </div><!--Aqui termina el primer panel-->
-
-                                                <!--Este el otro panel-->
-
-                                                <div class="panel panel-primary" style="width: 68%;border-color: black">
-                                                    <div class="panel-heading" style="border-color: black;text-align: center;background-color: #04536C">Datos para Cuentas de Usuario</div>
-                                                    <div class="panel-body">
-                                                        <b:formGroup>
-                                                            <div class="col-md-4 col-xs-12" style="text-align: right;padding-top: 5px;"><!--Tipo de Cuenta-->
-                                                                Tipo de cuenta:
-                                                            </div>
-
-                                                            <div class="col-md-5 col-xs-12">
-                                                                <b:selectOneMenu value="#{usuarioController.usuario.tipo_usuario}">
-                                                                    <f:selectItem itemLabel="Administrador" itemValue="A"/>
-                                                                    <f:selectItem itemLabel="Operario" itemValue="O"/>
-                                                                </b:selectOneMenu>
-
-                                                            </div>
-                                                            <br/><br/>
-                                                        </b:formGroup>
-
-
-                                                        <div class="col-md-4 col-xs-12" style="text-align: right;padding-top: 5px;"><!--Usuario-->
-                                                            Usuario:
-                                                        </div>
-
-                                                        <div class="col-md-5 col-xs-12">
-                                                            <h:inputText id="UsuarioU" class="form-control" value="#{usuarioController.usuario.usuario}" style=""/> 
-                                                        </div>
-                                                        <br/><br/>
-
-
-
-                                                        <div class="col-md-4 col-xs-12" style="text-align: right;padding-top: 5px;"><!--Contraseña-->
-                                                            Contraseña:
-                                                        </div>
-
-                                                        <div class="col-md-5 col-xs-12">
-                                                            <h:inputText id="ContraU" class="form-control" value="#{usuarioController.usuario.clave}" style=""/> 
-
-                                                        </div>
-                                                        <br/><br/>
-
-                                                        <div class="col-md-4 col-xs-12" style="text-align: right;padding-top: 5px;"><!--Repetir Contra-->
-                                                            Repetir Contraseña:
-                                                        </div>
-
-                                                        <div class="col-md-5 col-xs-12">
-                                                            <h:inputText id="RepetirContraU" class="form-control"/> 
-                                                        </div>
-                                                    </div>
-                                                </div>
-
-
-                                            </div>
-                                            <div class ="col-md-3" style=""></div>
-                                            <div class="col-md-3" >
-                                                <b:commandButton id="btnRegistrarU" update=":frmMostrar,mensaje" actionListener="#{usuarioController.modificar()}" value="Modificar" class="form-control" 
-                                                                 style="background-color:#D2D4D6;color: black;border-color: black;width:85%" 
-                                                                 action="GestionUsuarioAdm.xhtml?faces-redirect=true">
-
-                                                </b:commandButton>
-
-                                            </div>
-                                            <div class="col-md-6"></div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
                     </h:form>
-                </p:dialog>
+                    <f:facet name="footer">
+                        <b:button value="Cerrar" dismiss="modal" />
+                    </f:facet>
+                </b:modal>
 
+
+                <b:modal id="modalModificar" title="Modificación de Usuarios" style="text-align: center" styleClass="modalPseudoClass" size="modal-lg" >
+                    <p:growl id="growlM" autoUpdate="false" severity="info, fatal" showSummary="true" showDetail="true"/>
+                    <h:form id="frmModificar">
+
+                        <b:row>
+                            <div class="col-lg-12" align="center">
+                                <b:panel look="primary" collapsible="false" style="width: 75%;border-color: black;text-align: center">
+                                    <f:facet name="heading">
+                                        <h4>Datos Personales</h4>
+                                    </f:facet>
+                                    <div class="panel-body" align="center">
+                                        <h:panelGrid id="grid" columns="3" cellpadding="5" style="text-align:  center">
+
+                                            <p:outputLabel for="nombres" value="Nombres:" />
+
+                                            <p:inputText id="nombres" class="form-control" value="#{usuarioController.persona.nombres}" required="true" requiredMessage="Campo Requerido"/> 
+
+                                            <p:message for="nombres" style="padding-left: 10px;"/>
+
+                                            <p:outputLabel/><p:outputLabel/><p:outputLabel/>
+
+                                            <p:outputLabel for="apellidos" value="Apellidos:"  />
+
+                                            <p:inputText id="apellidos" class="form-control" value="#{usuarioController.persona.apellidos}" required="true" requiredMessage="Campo Requerido"/> 
+
+                                            <p:message for="apellidos" style="padding-left: 10px;"/>
+
+                                            <p:outputLabel/><p:outputLabel/><p:outputLabel/>
+
+                                            <p:outputLabel for="sexo" value="Sexo:" />
+
+                                            <h:selectOneMenu value="#{usuarioController.persona.sexo}" id="sexo" class="form-control">
+                                                <f:selectItem itemLabel="----Seleccione----" noSelectionOption="true"/>
+                                                <f:selectItem itemLabel="Masculino" itemValue="M"/>
+                                                <f:selectItem itemLabel="Femenino" itemValue="F"/>
+                                            </h:selectOneMenu>
+
+                                            <p:message for="sexo" style="padding-left: 10px;"/>
+                                            <p:outputLabel/><p:outputLabel/><p:outputLabel/>
+
+                                            <p:outputLabel for="dui" value="DUI:"/>
+
+                                            <p:inputMask mask="99999999-9" id="dui" class="form-control" value="#{usuarioController.persona.dui}" required="true" requiredMessage="Campo Requerido"/> 
+
+                                            <p:message for="dui" style="padding-left: 10px;"/>
+
+                                            <p:outputLabel/><p:outputLabel/><p:outputLabel/>      
+
+                                            <p:outputLabel for="nit" value="NIT:" />
+
+                                            <p:inputMask mask="9999-999999-999-9" id="nit" class="form-control" value="#{usuarioController.persona.nit}" required="true" requiredMessage="Campo Requerido"/> 
+
+                                            <p:message for="nit" style="padding-left: 10px;"/>
+
+                                            <p:outputLabel/><p:outputLabel/><p:outputLabel/>    
+
+
+                                            <h:outputLabel for="fechaNac" value="Fecha Nac. :"  style="padding-right: 60px"/>
+
+                                            <p:calendar id="fechaNac" showOn="button" locale="es" yearRange="c-100:c+100" pattern="dd/MM/yyyy" navigator="true" value="#{usuarioController.persona.fechaNacimiento}"/>
+
+                                            <p:message for="fechaNac" style="padding-left: 10px;"/>
+
+                                            <h:outputLabel/><p:outputLabel/><p:outputLabel/>    
+
+                                            <p:outputLabel for="direccion" value="Dirección:" />
+
+                                            <p:inputText id="direccion" class="form-control" value="#{usuarioController.persona.direccion}" required="true" requiredMessage="Campo Requerido"/> 
+
+                                            <p:message for="direccion" style="padding-left: 10px;"/>
+
+                                            <p:outputLabel/><p:outputLabel/><p:outputLabel/>    
+
+                                            <p:outputLabel for="telefono" value="Teléfono:"  />
+
+                                            <p:inputMask mask="9999-9999" id="telefono" class="form-control" value="#{usuarioController.persona.telefono}" required="true" requiredMessage="Campo Requerido"/> 
+
+                                            <p:message for="telefono" style="padding-left: 10px;"/>
+
+                                            <p:outputLabel/><p:outputLabel/><p:outputLabel/>    
+
+                                        </h:panelGrid>
+                                    </div>
+
+                                </b:panel><!--Aqui termina el primer panel-->
+
+
+
+                                <b:column col-md="5"></b:column>
+                                <b:column col-md="3">
+
+                                    <b:commandButton id="btnModificarU" update=":frmMostrar,grid,growlM" actionListener="#{usuarioController.modificar()}" value="Modificar" class="form-control" 
+                                                     style="background-color:#D2D4D6;color: black;border-color: black;width:80%" 
+                                                     action="GestionUsuarioAdm.xhtml?faces-redirect=true"/>
+                                </b:column>
+                            </div>
+                            <b:column col-lg="2"></b:column>
+                        </b:row>
+
+                    </h:form>
+                    <f:facet name="footer">
+                        <b:button value="Cerrar" dismiss="modal" />
+                    </f:facet>
+                </b:modal>
 
 
             </ui:define>
 
         </ui:composition>
 
-    </body>
+    </h:body>
 </html>
