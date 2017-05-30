@@ -21,7 +21,7 @@ public class Backup implements Serializable {
 
     ServletContext ctx = (ServletContext) FacesContext.getCurrentInstance().getExternalContext().getContext();
 
-    private String txtPath = "C:\\Users\\admin\\Desktop";
+    private String txtPath = "C:\\Users\\elgor\\Desktop";
     private String lblMessage;
 
     public void crearBackup() {
@@ -39,7 +39,7 @@ public class Backup implements Serializable {
             //strFilename = String.valueOf(nowLong);
             System.out.println(strFilename);
             //  String command = "C:/Program Files/MySQL/MySQL Server 5.0/bin/mysqldump -u(db user name) -p(db password) --add-drop-database -B (db name) -r " + "\"" + txtPath.getText().toString() + "\\" + strFilename + ".sql\"";
-            String command = "C:\\Program Files\\MySQL\\MySQL Server 5.7\\bin\\mysqldump -u(root) -p(admin) --add-drop-database -B (teneria) -r " + "\"" + txtPath.toString() + "\\" + strFilename + ".sql\"";
+            String command = "C:\\Program Files\\MySQL\\MySQL Server 5.7\\bin\\mysqldump -uroot -padmin --add-drop-database -B teneria -r " + "\"" + txtPath.toString() + "\\" + strFilename + ".sql\"";
             System.out.println(command);
             Process p = null;
             try {
@@ -61,5 +61,10 @@ public class Backup implements Serializable {
                 e.printStackTrace();
             }
         }
+    }
+    
+    public void cargarBackup(){
+    
+    
     }
 }

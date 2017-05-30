@@ -2,6 +2,7 @@ package com.tenerianoe.controller;
 
 import com.tenerianoe.ejb.UsuarioFacadeLocal;
 import com.tenerianoe.model.Usuario;
+import java.io.IOException;
 import java.io.Serializable;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
@@ -36,6 +37,7 @@ public class LoginController implements Serializable {
             us = usuarioEJB.iniciarSesion(usuario);
 
             if (us != null) {
+                FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("usuario", us);
                 redireccion = "/inicioAdm.xhtml?faces-redirect=true";
 
             } else {
@@ -56,4 +58,7 @@ public class LoginController implements Serializable {
         this.usuario = usuario;
     }
 
+    public void cerrarSesion() throws IOException{
+        FacesContext.getCurrentInstance().getExternalContext().invalidateSession();
+    }
 }

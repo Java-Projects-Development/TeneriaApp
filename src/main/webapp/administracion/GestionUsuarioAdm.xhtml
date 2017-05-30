@@ -181,7 +181,7 @@
                                                                   <p:outputLabel for="usuario" value="Usuario:"  />
 
                                                                   <p:inputText id="usuario" class="form-control" value="#{usuarioController.usuario.usuario}" validatorMessage="Numeros y caracteres especiales no permitidos." required="true" requiredMessage="Campo Requerido">
-                                                                        <f:validateRegex pattern="/^[a-z]{3,10}$/"/>
+                                                                        <f:validateRegex pattern="^[a-zA-Z ]+$" />
                                                                   </p:inputText> 
 
                                                                   <p:message for="usuario" style="padding-left: 10px;"/>

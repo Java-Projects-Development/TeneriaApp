@@ -14,6 +14,7 @@ import javax.faces.application.FacesMessage;
 import javax.faces.view.ViewScoped;
 import javax.faces.context.FacesContext;
 import javax.inject.Named;
+import org.apache.commons.codec.digest.DigestUtils;
 
 /**
  *
@@ -49,6 +50,9 @@ public class UsuarioController implements Serializable {
     public void registrar() {
         try {
             this.usuario.setId_usuario(persona);
+            String encriptar;
+            encriptar = DigestUtils.sha1Hex(usuario.getClave());
+            usuario.setClave(encriptar);
             usuarioEJB.create(usuario);
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Aviso", "Usuario registrado con éxito"));
             FacesContext context = FacesContext.getCurrentInstance();

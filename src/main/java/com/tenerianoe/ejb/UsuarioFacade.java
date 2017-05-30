@@ -11,6 +11,7 @@ import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
+import org.apache.commons.codec.digest.DigestUtils;
 
 /**
  *
@@ -38,7 +39,8 @@ public class UsuarioFacade extends AbstractFacade<Usuario> implements UsuarioFac
         try {
             consulta = "FROM Usuario u WHERE u.usuario = ?1 and u.clave= ?2";
             Query query = em.createQuery(consulta);
-
+            String desencriptar= DigestUtils.sha1Hex(us.getClave());
+            us.setClave(desencriptar);
             query.setParameter(1, us.getUsuario());
             query.setParameter(2, us.getClave());
 
