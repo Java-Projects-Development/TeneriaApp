@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="null" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="7905dd38-37c1-4bf8-a3c8-ecdb672817d9">
+	<property name="ireport.zoom" value="1.5"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<queryString language="SQL">
+		<![CDATA[select * from catalogo_producto]]>
+	</queryString>
+	<field name="producto" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="unidadMedida" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="stockActual" class="java.lang.Double">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="stockMinimo" class="java.lang.Double">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<background>
+		<band/>
+	</background>
+	<title>
+		<band height="72">
+			<frame>
+				<reportElement mode="Opaque" x="-40" y="-33" width="595" height="105" backcolor="#006699" uuid="5471f932-5af5-4ea5-b74e-1aeb5a8bec85"/>
+				<box>
+					<pen lineColor="#006666"/>
+					<topPen lineColor="#006666"/>
+					<leftPen lineColor="#006666"/>
+					<bottomPen lineColor="#006666"/>
+					<rightPen lineColor="#006666"/>
+				</box>
+				<staticText>
+					<reportElement x="136" y="33" width="375" height="43" forecolor="#FFFFFF" uuid="f89c81bc-be59-486a-a121-24799547a9fd"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font fontName="Times New Roman" size="34" isBold="true"/>
+					</textElement>
+					<text><![CDATA[Reporte de Productos]]></text>
+				</staticText>
+				<image>
+					<reportElement x="20" y="12" width="144" height="93" uuid="d6ca2656-acc2-4d7b-a3e4-a5e7cdb33505"/>
+					<imageExpression><![CDATA["C:\\Users\\admin\\Desktop\\teneriaLogo.jpg"]]></imageExpression>
+				</image>
+			</frame>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="5"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="41">
+			<line>
+				<reportElement x="-20" y="39" width="595" height="1" forecolor="#666666" uuid="21373438-0c70-452d-8706-a29ff43fa067"/>
+			</line>
+			<staticText>
+				<reportElement x="222" y="1" width="150" height="38" uuid="4b3e3a8c-1103-4bb1-b791-8a05dbd3ffc1"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Times New Roman" size="18" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Unidad de Medida]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="8" y="1" width="136" height="39" uuid="473b06ac-f539-42cb-a815-51bb479b8e7d"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Times New Roman" size="18" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Producto]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="437" y="1" width="118" height="39" uuid="3e083e40-ee0e-4b13-a8d6-130a1459bd8a"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Times New Roman" size="18" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Existencia Actual]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="49">
+			<line>
+				<reportElement positionType="FixRelativeToBottom" x="0" y="31" width="555" height="1" uuid="6bc0b832-b85e-4d02-b59e-850f414fb81a"/>
+			</line>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="46" y="0" width="123" height="30" uuid="eef0f475-34c1-4605-bd7d-e1218ab850d3"/>
+				<textElement verticalAlignment="Middle">
+					<font size="16"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{producto}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="467" y="1" width="88" height="30" uuid="4c6ee1f6-9e7f-478d-9f6f-a6315b419115"/>
+				<textElement verticalAlignment="Middle">
+					<font size="16"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{stockActual}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="259" y="1" width="138" height="31" uuid="2ffc8a01-1702-4044-a49f-7bd20c02fb16"/>
+				<textElement verticalAlignment="Middle">
+					<font size="16"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{unidadMedida}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band/>
+	</columnFooter>
+	<pageFooter>
+		<band height="17">
+			<textField>
+				<reportElement mode="Opaque" x="0" y="4" width="515" height="13" backcolor="#E6E6E6" uuid="6974104c-9e7f-446d-8b76-30302d0c7745"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA["Pagina "+$V{PAGE_NUMBER}+" de"]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement mode="Opaque" x="515" y="4" width="40" height="13" backcolor="#E6E6E6" uuid="cb9c80d5-b026-4c6d-8f63-a47e5b91d441"/>
+				<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<textField pattern="EEEEE dd MMMMM yyyy">
+				<reportElement x="0" y="4" width="100" height="13" uuid="87a9746f-5d07-40ce-a8d7-7ef03c6821fa"/>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+	<summary>
+		<band/>
+	</summary>
+</jasperReport>
