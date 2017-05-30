@@ -194,14 +194,14 @@
                                                 </h:panelGrid>
                                                 <b:row>
                                                       <b:column col-lg="4">
-                                                            <p:commandButton action="EntradaProductoAdm.xhtml?faces-redirect=true" update="growlR"
+                                                            <p:commandButton update="growlR"
                                                                              value="Registrar" actionListener="#{entradaProductoController.guardarCompra()}" 
                                                                              class="form-control" style="background-color:#D2D4D6;color: black;border-color: black;"/>
                                                       </b:column>
                                                       <b:column col-lg="4">
-                                                            <p:commandButton action="EntradaProductoAdm.xhtml?faces-redirect=true" 
+                                                            <p:commandButton 
                                                                              value="Imprimir" ajax="false"  onclick="this.form.target = '_blank'" action="#{entradaProductoController.verReporte()}"
-                                                                             class="form-control" style="background-color:#D2D4D6;color: black;border-color: black;"/>
+                                                                              class="form-control" style="background-color:#D2D4D6;color: black;border-color: black;"/>
                                                       </b:column>
                                                       <b:column col-lg="4">
                                                             <p:commandButton value="Cancelar" actionListener="#{entradaProductoController.limpiarFactura()}" 

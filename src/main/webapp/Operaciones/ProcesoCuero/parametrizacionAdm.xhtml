@@ -27,68 +27,68 @@
                                     <f:facet name="heading">
                                         <h4>Información de Procesos</h4>
                                     </f:facet>
+
+                                    <br/>
+                                    <b:column col-lg="3" style="text-align: center;padding-top: 5px">
+                                        Seleccione Etapa:
+                                    </b:column>
+                                    <b:column col-lg="2">
+                                        <h:selectOneMenu converter="entityConverter" 
+                                                         style=" width: 150px" required="true"
+                                                         requiredMessage="Debe seleccionar una etapa"
+                                                         class="form-control"
+                                                         value="#{parametrizacionController.insumo.idEtapa}" >
+                                            <f:selectItem itemLabel="  --  Seleccione  --" itemValue="#{null}"/>
+                                            <f:selectItems value="#{parametrizacionController.listaEtapas}" 
+                                                           itemLabel="#{etapa.etapa}" var="etapa" itemValue="#{etapa}"/> 
+                                        </h:selectOneMenu>
+                                    </b:column>
+                                    <b:column col-lg="3" style="text-align: center;padding-top: 5px">
+                                        Seleccione un Producto:
+                                    </b:column>
+                                    <b:column col-lg="2">
+                                        <p:selectOneMenu  filter="true" filterMatchMode="contains"
+                                                          required="true" requiredMessage="Debe seleccionar un producto"
+                                                          converter="entityConverter" style=" width: 150px" 
+                                                          value="#{parametrizacionController.insumo.idCatalogoProducto}">
+                                            <f:selectItem itemLabel="  --  Seleccione  --" itemValue="#{null}"/>
+                                            <f:selectItems value="#{parametrizacionController.listaProductos}"
+                                                           itemLabel="#{producto.producto}"
+                                                           var="producto" itemValue="#{producto}"/>  
+                                        </p:selectOneMenu>
+                                    </b:column>
+
+                                    <br/><br/><br/>
+
+                                    <b:column col-lg="3" style="text-align: center;padding-top: 5px">
+                                        Porcentaje del Producto:
+                                    </b:column>
+                                    <b:column col-lg="2">
+                                        <b:inputText value="#{parametrizacionController.insumo.porcentaje}">
+                                            <f:facet name="prepend">
+                                                <h:outputText value="%" />
+                                            </f:facet>
+                                        </b:inputText>
+                                    </b:column>
+
                                     
-                                        <br/>
-                                        <b:column col-lg="3" style="text-align: center;padding-top: 5px">
-                                            Seleccione Etapa:
-                                        </b:column>
-                                        <b:column col-lg="2">
-                                            <h:selectOneMenu converter="entityConverter" 
-                                                             style=" width: 150px" required="true"
-                                                             requiredMessage="Debe seleccionar una etapa"
-                                                             class="form-control"
-                                                             value="#{parametrizacionController.insumo.idEtapa}" >
-                                                <f:selectItem itemLabel="  --  Seleccione  --" itemValue="#{null}"/>
-                                                <f:selectItems value="#{parametrizacionController.listaEtapas}" 
-                                                               itemLabel="#{etapa.etapa}" var="etapa" itemValue="#{etapa}"/> 
-                                            </h:selectOneMenu>
-                                        </b:column>
-                                        <b:column col-lg="3" style="text-align: center;padding-top: 5px">
-                                            Seleccione un Producto:
-                                        </b:column>
-                                        <b:column col-lg="2">
-                                            <p:selectOneMenu  filter="true" filterMatchMode="contains"
-                                                              required="true" requiredMessage="Debe seleccionar un producto"
-                                                              converter="entityConverter" style=" width: 150px" 
-                                                              value="#{parametrizacionController.insumo.idCatalogoProducto}">
-                                                <f:selectItem itemLabel="  --  Seleccione  --" itemValue="#{null}"/>
-                                                <f:selectItems value="#{parametrizacionController.listaProductos}"
-                                                               itemLabel="#{producto.producto}"
-                                                               var="producto" itemValue="#{producto}"/>  
-                                            </p:selectOneMenu>
-                                        </b:column>
-
-                                        <br/><br/><br/>
-
-                                        <b:column col-lg="3" style="text-align: center;padding-top: 5px">
-                                            Porcentaje del Producto:
-                                        </b:column>
-                                        <b:column col-lg="2">
-                                            <b:inputText value="#{parametrizacionController.insumo.porcentaje}">
-                                                <f:facet name="prepend">
-                                                    <h:outputText value="%" />
-                                                </f:facet>
-                                            </b:inputText>
-                                        </b:column>
-
-                                        <b:column col-lg="1"></b:column>
-                                        <b:column col-lg="3" style="align-content: center">
-                                            <p:commandButton value="Agregar" actionListener="#{parametrizacionController.asignarValores}"  
-                                                             process="@form" update=":frmParametrizar" class="form-control" action="parametrizacionAdm.xhtml?faces-redirect=true"
-                                                             style="background-color:#D2D4D6;color: black;border-color: black;width: 60%;">
-                                                
-                                                <p:ajax update="tblParametros"/>
-                                            </p:commandButton>
-
-                                        </b:column>
-                                    
+                                    <b:column col-lg="3" style="align-content: center">
+                                        <p:commandButton value="Agregar" actionListener="#{parametrizacionController.asignarValores}"  
+                                                         process="@form" update=":frmParametrizar" class="form-control" action="parametrizacionAdm.xhtml?faces-redirect=true"
+                                                         style="background-color:#D2D4D6;color: black;border-color: black;">
+                                            <p:ajax update="tblParametros"/>
+                                        </p:commandButton>
+                                    </b:column>
+                                    <b:column col-lg="3" style="align-content: center">
+                                        <p:commandButton value="Imprimir" class="form-control" ajax="false"  onclick="this.form.target = '_blank'" action="#{parametrizacionController.verReporte()}" style="background-color:#D2D4D6;color: black;border-color: black;"/>
+                                    </b:column>
                                 </b:panel>
-                                
+
                                 <b:panel id="datosP" look="primary" collapsible="false" style="border-color: black;text-align: center">
                                     <f:facet name="heading">
                                         <h4>Valores de Parametrización</h4>
                                     </f:facet>
-                                    <p:commandButton value="Imprimir" ajax="false"  onclick="this.form.target = '_blank'" action="#{parametrizacionController.verReporte()}" style="width: 150px;height: 60px" />
+
                                     <p:dataTable id="tblParametros" widgetVar="insumosTable" var="insumo" 
                                                  value="#{parametrizacionController.listaInsumosPorcentajes}"
                                                  expandableRowGroups="true" sortBy="#{insumo.idEtapa.etapa  }"
@@ -123,6 +123,7 @@
 
                             </b:column>
                         </b:panel>
+
                     </h:form>
                 </b:container>
             </ui:define>

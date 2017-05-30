@@ -25,7 +25,7 @@ import javax.ejb.EJB;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.context.FacesContext;
-import javax.faces.view.ViewScoped;
+import javax.faces.bean.ViewScoped;
 import javax.inject.Named;
 import javax.servlet.ServletContext;
 import org.primefaces.event.CellEditEvent;
@@ -34,7 +34,7 @@ import org.primefaces.event.CellEditEvent;
  *
  * @author said
  */
-@Named
+@ViewScoped
 @ManagedBean(name = "entradaProductoController")
 public class EntradaProductoController implements Serializable {
 

@@ -168,10 +168,6 @@ where factura.numeroFactura= $P{numeroFactura}]]>
 				</textElement>
 				<text><![CDATA[Telefono;]]></text>
 			</staticText>
-			<image>
-				<reportElement x="227" y="45" width="150" height="80" uuid="a4cbd70d-a2a6-4e4e-8868-cbaf3c42fc5c"/>
-				<imageExpression><![CDATA["C:\\Users\\admin\\Desktop\\teneriaLogo.jpg"]]></imageExpression>
-			</image>
 			<line>
 				<reportElement x="0" y="136" width="555" height="1" uuid="d939baf8-d6d2-40b2-8d54-ba1ec608b86b"/>
 			</line>

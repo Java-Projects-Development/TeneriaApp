@@ -39,10 +39,6 @@
 					</textElement>
 					<text><![CDATA[Reporte de Productos]]></text>
 				</staticText>
-				<image>
-					<reportElement x="20" y="12" width="144" height="93" uuid="d6ca2656-acc2-4d7b-a3e4-a5e7cdb33505"/>
-					<imageExpression><![CDATA["C:\\Users\\admin\\Desktop\\teneriaLogo.jpg"]]></imageExpression>
-				</image>
 			</frame>
 		</band>
 	</title>
