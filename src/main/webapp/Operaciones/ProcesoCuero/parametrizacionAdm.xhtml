@@ -83,11 +83,12 @@
                                         </b:column>
                                     
                                 </b:panel>
-
+                                
                                 <b:panel id="datosP" look="primary" collapsible="false" style="border-color: black;text-align: center">
                                     <f:facet name="heading">
                                         <h4>Valores de Parametrización</h4>
                                     </f:facet>
+                                    <p:commandButton value="Imprimir" ajax="false"  onclick="this.form.target = '_blank'" action="#{parametrizacionController.verReporte()}" style="width: 150px;height: 60px" />
                                     <p:dataTable id="tblParametros" widgetVar="insumosTable" var="insumo" 
                                                  value="#{parametrizacionController.listaInsumosPorcentajes}"
                                                  expandableRowGroups="true" sortBy="#{insumo.idEtapa.etapa  }"

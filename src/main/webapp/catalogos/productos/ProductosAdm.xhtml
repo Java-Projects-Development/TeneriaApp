@@ -33,6 +33,7 @@
                                                       <h4>Productos Registrados</h4>
                                                 </f:facet>
                                                 <h:form id="frmMostrar">
+                                                    <h:commandButton image="/recursos/imagenes/pdf.png" style="width:50px;height:50px" onclick="this.form.target = '_blank'"  actionListener="#{productoController.verReporte()}"/>
                                                       <b:dataTable value="#{productoController.productos}" var="prod" responsive="true" widgetVar="dtU" style="text-align: center">
                                                             <b:dataTableColumn label="Producto" value="#{prod.producto}" style="text-align: center"/>
                                                             <b:dataTableColumn label="Cantidad Actual" value="#{prod.stockActual}" style="text-align: center"/>
