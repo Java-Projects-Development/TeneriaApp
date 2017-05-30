@@ -71,7 +71,9 @@
 
                                                                   <p:outputLabel for="proveedor" value="Nombre del proveedor:" />
 
-                                                                  <p:inputText id="proveedor" class="form-control" value="#{proveedorController.proveedor.proveedor}" required="true" requiredMessage="Campo Requerido"/> 
+                                                                  <p:inputText id="proveedor" class="form-control" value="#{proveedorController.proveedor.proveedor}" required="true" validatorMessage="Números y caracteres no permitidos." requiredMessage="Campo Requerido">
+                                                                        <f:validateRegex pattern="^[a-zA-Z ]+$" />
+                                                                  </p:inputText> 
 
                                                                   <p:message for="proveedor" style="padding-left: 10px;"/>
 
@@ -79,7 +81,9 @@
 
                                                                   <p:outputLabel for="propietario" value="Nombre del propietario:"  />
 
-                                                                  <p:inputText id="propietario" class="form-control" value="#{proveedorController.proveedor.propietario}" required="true" requiredMessage="Campo Requerido"/> 
+                                                                  <p:inputText id="propietario" class="form-control" value="#{proveedorController.proveedor.propietario}" required="true" validatorMessage="Números y caracteres no permitidos." requiredMessage="Campo Requerido">
+                                                                        <f:validateRegex pattern="^[a-zA-Z ]+$" />
+                                                                  </p:inputText> 
 
                                                                   <p:message for="propietario" style="padding-left: 10px;"/>
 
@@ -87,15 +91,15 @@
 
                                                                   <p:outputLabel for="dui" value="DUI:" />
 
-                                                                  <p:inputText id="dui" class="form-control" value="#{proveedorController.proveedor.dui}" required="true" requiredMessage="Campo Requerido"/> 
+                                                                  <p:inputMask mask="99999999-9" id="dui" class="form-control" value="#{proveedorController.proveedor.dui}" required="true" requiredMessage="Campo Requerido"/> 
 
                                                                   <p:message for="dui" style="padding-left: 10px;"/>
 
                                                                   <p:outputLabel/><p:outputLabel/><p:outputLabel/>
-                                                                  
+
                                                                   <p:outputLabel for="nit" value="NIT:" />
 
-                                                                  <p:inputText id="nit" class="form-control" value="#{proveedorController.proveedor.nit}" required="true" requiredMessage="Campo Requerido"/> 
+                                                                  <p:inputMask mask="9999-999999-999-9" id="nit" class="form-control" value="#{proveedorController.proveedor.nit}" required="true" requiredMessage="Campo Requerido"/> 
 
                                                                   <p:message for="nit" style="padding-left: 10px;"/>
 
@@ -111,7 +115,7 @@
 
                                                                   <p:outputLabel for="tel" value="Teléfono:" />
 
-                                                                  <p:inputText id="tel" class="form-control" value="#{proveedorController.proveedor.telefono}" required="true" requiredMessage="Campo Requerido"/> 
+                                                                  <p:inputMask mask="9999-9999" id="tel" class="form-control" value="#{proveedorController.proveedor.telefono}" required="true" requiredMessage="Campo Requerido"/> 
 
                                                                   <p:message for="tel" style="padding-left: 10px;"/>
 
@@ -151,7 +155,9 @@
 
                                                                   <p:outputLabel for="proveedor" value="Nombre del proveedor:" />
 
-                                                                  <p:inputText id="proveedor" class="form-control" value="#{proveedorController.proveedor.proveedor}" required="true" requiredMessage="Campo Requerido"/> 
+                                                                  <p:inputText id="proveedor" class="form-control" value="#{proveedorController.proveedor.proveedor}" required="true" validatorMessage="Números y caracteres no permitidos." requiredMessage="Campo Requerido">
+                                                                        <f:validateRegex pattern="^[a-zA-Z ]+$" />
+                                                                  </p:inputText> 
 
                                                                   <p:message for="proveedor" style="padding-left: 10px;"/>
 
@@ -159,7 +165,9 @@
 
                                                                   <p:outputLabel for="propietario" value="Nombre del propietario:"  />
 
-                                                                  <p:inputText id="propietario" class="form-control" value="#{proveedorController.proveedor.propietario}" required="true" requiredMessage="Campo Requerido"/> 
+                                                                  <p:inputText id="propietario" class="form-control" value="#{proveedorController.proveedor.propietario}" required="true" validatorMessage="Números y caracteres no permitidos." requiredMessage="Campo Requerido">
+                                                                        <f:validateRegex pattern="^[a-zA-Z ]+$" />
+                                                                  </p:inputText> 
 
                                                                   <p:message for="propietario" style="padding-left: 10px;"/>
 
@@ -167,15 +175,15 @@
 
                                                                   <p:outputLabel for="dui" value="DUI:" />
 
-                                                                  <p:inputText id="dui" class="form-control" value="#{proveedorController.proveedor.dui}" required="true" requiredMessage="Campo Requerido"/> 
+                                                                  <p:inputMask mask="99999999-9" id="dui" class="form-control" value="#{proveedorController.proveedor.dui}" required="true" requiredMessage="Campo Requerido"/> 
 
                                                                   <p:message for="dui" style="padding-left: 10px;"/>
 
                                                                   <p:outputLabel/><p:outputLabel/><p:outputLabel/>
-                                                                  
+
                                                                   <p:outputLabel for="nit" value="NIT:" />
 
-                                                                  <p:inputText id="nit" class="form-control" value="#{proveedorController.proveedor.nit}" required="true" requiredMessage="Campo Requerido"/> 
+                                                                  <p:inputMask mask="9999-999999-999-9" id="nit" class="form-control" value="#{proveedorController.proveedor.nit}" required="true" requiredMessage="Campo Requerido"/> 
 
                                                                   <p:message for="nit" style="padding-left: 10px;"/>
 
@@ -191,11 +199,11 @@
 
                                                                   <p:outputLabel for="tel" value="Teléfono:" />
 
-                                                                  <p:inputText id="tel" class="form-control" value="#{proveedorController.proveedor.telefono}" required="true" requiredMessage="Campo Requerido"/> 
+                                                                  <p:inputMask mask="9999-9999" id="tel" class="form-control" value="#{proveedorController.proveedor.telefono}" required="true" requiredMessage="Campo Requerido"/> 
 
                                                                   <p:message for="tel" style="padding-left: 10px;"/>
 
-                                                                  <p:outputLabel/><p:outputLabel/><p:outputLabel/> 
+                                                                  <p:outputLabel/><p:outputLabel/><p:outputLabel/>       
 
                                                             </h:panelGrid>
                                                       </div>
