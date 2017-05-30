@@ -24,7 +24,7 @@ import javax.faces.context.FacesContext;
  *
  * @author admin
  */
-@ManagedBean(name="parametrizacionController")
+@ManagedBean(name = "parametrizacionController")
 @ViewScoped
 public class ParametrizacionController implements Serializable {
 
@@ -63,6 +63,7 @@ public class ParametrizacionController implements Serializable {
         try {
             insumosEJB.create(insumo);
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Aviso", "Parametrizacion registrada"));
+            FacesContext.getCurrentInstance().getExternalContext().getFlash().setKeepMessages(true);
         } catch (Exception e) {
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Aviso", "Error"));
 
