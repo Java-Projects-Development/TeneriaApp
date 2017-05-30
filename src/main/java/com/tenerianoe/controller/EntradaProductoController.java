@@ -14,16 +14,20 @@ import com.tenerianoe.model.CatalogoProveedor;
 import com.tenerianoe.model.DetalleFactura;
 import com.tenerianoe.model.Factura;
 import com.tenerianoe.model.catalogo_producto;
+import com.tenerianoe.report.ReporteProveedor;
 import java.io.Serializable;
 import java.math.BigDecimal;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.faces.application.FacesMessage;
+import javax.faces.bean.ManagedBean;
 import javax.faces.context.FacesContext;
 import javax.faces.view.ViewScoped;
 import javax.inject.Named;
+import javax.servlet.ServletContext;
 import org.primefaces.event.CellEditEvent;
 
 /**
@@ -31,7 +35,7 @@ import org.primefaces.event.CellEditEvent;
  * @author said
  */
 @Named
-@ViewScoped
+@ManagedBean(name = "entradaProductoController")
 public class EntradaProductoController implements Serializable {
 
     private CatalogoProveedor proveedorSeleccionado;
@@ -248,5 +252,17 @@ public class EntradaProductoController implements Serializable {
         }
     }
 
+    public void verReporte() throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException {
+
+        //Instancia hacia la clase reporteClientes        
+        ReporteProveedor rProveedor = new ReporteProveedor();
+
+        FacesContext facesContext = FacesContext.getCurrentInstance();
+        ServletContext servletContext = (ServletContext) facesContext.getExternalContext().getContext();
+        String ruta = servletContext.getRealPath("/reportes/facturaCompra.jasper");
+
+        rProveedor.getReporte2(ruta,factura.getNumeroFactura());
+        FacesContext.getCurrentInstance().responseComplete();
+    }
 
 }

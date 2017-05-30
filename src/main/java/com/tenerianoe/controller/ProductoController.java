@@ -8,7 +8,9 @@ package com.tenerianoe.controller;
 
 import com.tenerianoe.ejb.CatalogoProductoFacadeLocal;
 import com.tenerianoe.model.catalogo_producto;
+import com.tenerianoe.report.ReporteProveedor;
 import java.io.Serializable;
+import java.sql.SQLException;
 import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
@@ -16,6 +18,7 @@ import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import javax.faces.view.ViewScoped;
 import javax.inject.Named;
+import javax.servlet.ServletContext;
 
 /**
  *
@@ -63,6 +66,21 @@ public class ProductoController implements Serializable {
 
     }
 
+        public void verReporte() throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException {
+
+        //Instancia hacia la clase reporteClientes        
+        ReporteProveedor rProveedor = new ReporteProveedor();
+
+        FacesContext facesContext = FacesContext.getCurrentInstance();
+        ServletContext servletContext = (ServletContext) facesContext.getExternalContext().getContext();
+        String ruta = servletContext.getRealPath("/reportes/reporteProductos.jasper");
+
+        rProveedor.getReporte(ruta);
+        FacesContext.getCurrentInstance().responseComplete();
+    }
+        
+        
+        
     //Getter y Setter
     public catalogo_producto getProducto() {
         return producto;

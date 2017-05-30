@@ -11,7 +11,9 @@ import com.tenerianoe.ejb.InsumosPorcentajeFacadeLocal;
 import com.tenerianoe.model.catalogo_producto;
 import com.tenerianoe.model.Etapa;
 import com.tenerianoe.model.InsumosPorcentaje;
+import com.tenerianoe.report.ReporteProveedor;
 import java.io.Serializable;
+import java.sql.SQLException;
 import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
@@ -19,6 +21,7 @@ import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
+import javax.servlet.ServletContext;
 
 /**
  *
@@ -70,6 +73,19 @@ public class ParametrizacionController implements Serializable {
         }
     }
 
+    public void verReporte() throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException {
+
+        //Instancia hacia la clase reporteClientes        
+        ReporteProveedor rProveedor = new ReporteProveedor();
+
+        FacesContext facesContext = FacesContext.getCurrentInstance();
+        ServletContext servletContext = (ServletContext) facesContext.getExternalContext().getContext();
+        String ruta = servletContext.getRealPath("/reportes/reporteParametrizacion.jasper");
+
+        rProveedor.getReporte(ruta);
+        FacesContext.getCurrentInstance().responseComplete();
+    }
+    
     //Metodos para mostrar combos
     private boolean enabled;
 
