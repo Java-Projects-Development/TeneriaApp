@@ -26,7 +26,6 @@ import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.context.FacesContext;
 import javax.faces.bean.ViewScoped;
-import javax.inject.Named;
 import javax.servlet.ServletContext;
 import org.primefaces.event.CellEditEvent;
 
@@ -57,7 +56,7 @@ public class EntradaProductoController implements Serializable {
     private CatalogoProductoFacadeLocal productoEJB;
 
     private List<CatalogoProveedor> proveedores;
-
+    private List<Factura> facturas;
     private List<DetalleFactura> listaDetalleFactura;
 
     @PostConstruct
@@ -69,6 +68,7 @@ public class EntradaProductoController implements Serializable {
         proveedores = proveedorEJB.findAll();
         listaDetalleFactura = new ArrayList<>();
         detalleFactura = new DetalleFactura();
+        facturas= facturaEJB.findAll();
 
     }
 
@@ -204,6 +204,15 @@ public class EntradaProductoController implements Serializable {
         this.detalleFactura = detalleFactura;
     }
 
+    public List<Factura> getFacturas() {
+        return facturas;
+    }
+
+    public void setFacturas(List<Factura> facturas) {
+        this.facturas = facturas;
+    }
+
+    
     public void calcularTotalFacturaCompra() {
         BigDecimal totalFacturaCompra = new BigDecimal(0);
 
@@ -263,6 +272,19 @@ public class EntradaProductoController implements Serializable {
 
         rProveedor.getReporte2(ruta,factura.getNumeroFactura());
         FacesContext.getCurrentInstance().responseComplete();
+    }
+    
+    public void facturaReporte(Factura factura1 ) throws SQLException, ClassNotFoundException,InstantiationException, IllegalAccessException{
+    //Instancia hacia la clase reporteClientes        
+        ReporteProveedor rProveedor = new ReporteProveedor();
+
+        FacesContext facesContext = FacesContext.getCurrentInstance();
+        ServletContext servletContext = (ServletContext) facesContext.getExternalContext().getContext();
+        String ruta = servletContext.getRealPath("/reportes/facturaCompra.jasper");
+
+        rProveedor.getReporte2(ruta,factura1.getNumeroFactura());
+        FacesContext.getCurrentInstance().responseComplete();
+    
     }
 
 }

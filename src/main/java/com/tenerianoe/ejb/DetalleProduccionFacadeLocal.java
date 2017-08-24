@@ -6,6 +6,7 @@
 package com.tenerianoe.ejb;
 
 import com.tenerianoe.model.DetalleProduccion;
+import com.tenerianoe.model.Produccion;
 import java.util.List;
 import javax.ejb.Local;
 

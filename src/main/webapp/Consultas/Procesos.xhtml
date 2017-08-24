@@ -1,0 +1,115 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:b="http://bootsfaces.net/ui"
+      xmlns:p="http://primefaces.org/ui">
+
+    <body>
+
+        <ui:composition template="./../plantillas/mpAdmin.xhtml">
+
+
+            <ui:define name="content">
+                <f:view>
+                    <p:layout>
+                        <p:layoutUnit position="center">
+                            <h:form>
+
+                                <h1><h:outputText value="Procesos de Cuero"/></h1>
+                                <b:dataTable value="#{produccionController.listarProduccion}" var="item">
+                                    <h:column>
+                                        <f:facet name="header">
+                                            <h:outputText value="IdProduccion"/>
+                                        </f:facet>
+                                        <h:outputText value="#{item.idProduccion}"/>
+                                    </h:column>
+                                    <h:column>
+                                        <f:facet name="header">
+                                            <h:outputText value="NumeroProceso"/>
+                                        </f:facet>
+                                        <h:outputText value="#{item.numeroProceso}"/>
+                                    </h:column>
+                                    <h:column>
+                                        <f:facet name="header">
+                                            <h:outputText value="TipoCuero"/>
+                                        </f:facet>
+                                        <h:outputText value="#{item.tipoCuero}"/>
+                                    </h:column>
+                                    <h:column>
+                                        <f:facet name="header">
+                                            <h:outputText value="FechaInicio"/>
+                                        </f:facet>
+                                        <h:outputText value="#{item.fechaInicio}">
+                                            <f:convertDateTime pattern="MM/dd/yyyy" />
+                                        </h:outputText>
+                                    </h:column>
+                                    <h:column>
+                                        <f:facet name="header">
+                                            <h:outputText value="FechaFinalizacion"/>
+                                        </f:facet>
+                                        <h:outputText value="#{item.fechaFinalizacion}">
+                                            <f:convertDateTime pattern="MM/dd/yyyy" />
+                                        </h:outputText>
+                                    </h:column>
+                                    <h:column>
+                                        <f:facet name="header">
+                                            <h:outputText value="TipoPiel"/>
+                                        </f:facet>
+                                        <h:outputText value="#{item.tipoPiel}"/>
+                                    </h:column>
+                                    <h:column>
+                                        <f:facet name="header">
+                                            <h:outputText value="ProcedenciaPiel"/>
+                                        </f:facet>
+                                        <h:outputText value="#{item.procedenciaPiel}"/>
+                                    </h:column>
+                                    <h:column>
+                                        <f:facet name="header">
+                                            <h:outputText value="CantidadPiel"/>
+                                        </f:facet>
+                                        <h:outputText value="#{item.cantidadPiel}"/>
+                                    </h:column>
+                                    <h:column>
+                                        <f:facet name="header">
+                                            <h:outputText value="GrosorPiel"/>
+                                        </f:facet>
+                                        <h:outputText value="#{item.grosorPiel}"/>
+                                    </h:column >
+
+                                    <p:column headerText="Modificar">
+                                        <f:facet name="header">
+                                            <h:outputText value="Modificar"/>
+
+                                        </f:facet>
+                                        <p:commandLink value="Modificar"
+                                                       oncomplete="PF('dlgModificar').show();" update="frm:dlgPersona">
+                                        </p:commandLink>
+                                    </p:column>
+                                </b:dataTable>
+
+                                <p:dialog id="modificar" widgetVar="dlgModificar">
+
+
+                                    
+
+                                </p:dialog>
+
+
+                            </h:form>
+                        </p:layoutUnit>
+                    </p:layout>
+                </f:view>
+
+            </ui:define>
+
+            <ui:define name="bottom">
+
+            </ui:define>
+
+        </ui:composition>
+
+    </body>
+</html>

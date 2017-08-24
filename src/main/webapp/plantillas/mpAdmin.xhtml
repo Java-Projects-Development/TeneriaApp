@@ -9,7 +9,6 @@
 
     <h:head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-        <f:event type="preRenderView" listener="#{plantillaController.verificarSesion()}"/>
 
         <title>Teneria Noé</title>
 
@@ -110,6 +109,10 @@
                                         <b:navLink value="Crear Nuevo Proceso de Cuero" href="/TeneriaApp/Operaciones/ProcesoCuero/elaboracionCueroAdm.xhtml"></b:navLink>
                                     </b:dropMenu>
 
+                                     <b:dropMenu value="Consultas">
+                                        <b:navLink value="Compras de insumos" href="/TeneriaApp/Consultas/compras.xhtml"></b:navLink>
+                                        <b:navLink value="Procesos de Cuero" href="/TeneriaApp/Consultas/Procesos.xhtml"></b:navLink>
+                                    </b:dropMenu>
                                 </b:navbarLinks>
 
                                 <ul class="nav navbar-nav navbar-right">

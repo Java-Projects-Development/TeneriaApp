@@ -1,0 +1,83 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:b="http://bootsfaces.net/ui"
+      xmlns:p="http://primefaces.org/ui">
+
+    <body>
+
+        <ui:composition template="./../plantillas/mpAdmin.xhtml">
+
+
+
+            <ui:define name="content">
+                <f:view>
+
+
+                    <h:form>
+                        <p:layout>
+                            <p:layoutUnit position="center">
+                                <h1><h:outputText value="Compras de Insumos"/></h1>
+                                <b:dataTable value="#{entradaProductoController.facturas}" var="item">
+                                    <h:column>
+                                        <f:facet name="header">
+                                            <h:outputText value="IdFactura"/>
+                                        </f:facet>
+                                        <h:outputText value="#{item.idFactura}"/>
+                                    </h:column>
+                                    <h:column>
+                                        <f:facet name="header">
+                                            <h:outputText value="NumeroFactura"/>
+                                        </f:facet>
+                                        <h:outputText value="#{item.numeroFactura}"/>
+                                    </h:column>
+                                    <h:column>
+                                        <f:facet name="header">
+                                            <h:outputText value="TotalVenta"/>
+                                        </f:facet>
+                                        <h:outputText value="#{item.totalVenta}"/>
+                                    </h:column>
+                                    <h:column>
+                                        <f:facet name="header">
+                                            <h:outputText value="FechaRegistro"/>
+                                        </f:facet>
+                                        <h:outputText value="#{item.fechaRegistro}">
+                                            <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
+                                        </h:outputText>
+                                    </h:column>
+                                    <h:column>
+                                        <f:facet name="header">
+                                            <h:outputText value="Proveedor"/>
+                                        </f:facet>
+                                        <h:outputText value="#{item.proveedor.proveedor}"/>
+                                    </h:column>
+
+                                    <p:column headerText="Modificar">
+                                        <f:facet name="header">
+                                            <h:outputText value="Modificar"/>
+                                        </f:facet>
+                                        <p:commandLink 
+                                                       oncomplete="PF('dlgModificar').show();">
+                                            <p:graphicImage library="/resources/image" name="edit.jpg" />
+                                        </p:commandLink>
+
+                                    </p:column>
+                                </b:dataTable>
+                            </p:layoutUnit>
+                        </p:layout>
+                    </h:form>
+                </f:view>
+
+            </ui:define>
+
+            <ui:define name="bottom">
+
+            </ui:define>
+
+        </ui:composition>
+
+    </body>
+</html>

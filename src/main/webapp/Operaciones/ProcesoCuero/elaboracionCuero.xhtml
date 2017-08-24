@@ -82,7 +82,7 @@
                                                      update="msj"
                                                      style="width: 150px; height: 60px; padding: 15px"/>
 
-                                    <p:outputLabel style=" position: absolute; left: 600px" value="Proceso No"/>
+                                    <p:outputLabel style=" position: absolute; left: 600px" value="#{produccionController.listarProduccion.size()}"/>
 
                                     <p:outputLabel style=" position: absolute; left: 700px; font-size: 18px;font-style: initial"
                                                    value="#{produccionController.obtenerUltimoNumeroProceso()}"/>
@@ -94,7 +94,7 @@
 
 
                                     <p:dataTable id="tblParametros" widgetVar="insumosTable" var="insumo" 
-                                                 value="#{produccionController.listaDetallesProduccionPorProceso}"
+                                                 value="#{produccionController.listaDetallesProduccionPorProceso()}"
                                                  expandableRowGroups="true" sortBy="#{insumo.etapaProduccion}"
                                                  emptyMessage="No hay producto parametrizados por etapa" >
 

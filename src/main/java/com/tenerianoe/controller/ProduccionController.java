@@ -46,7 +46,8 @@ public class ProduccionController implements Serializable {
     private List<Produccion> listarProduccion;
     private List<DetalleProduccion> listaDetallesProduccion;
     private List<DetalleProduccion> listaDetallesProduccionPorProceso;
-
+    
+    
     @PostConstruct
     public void init() {
         produccion = new Produccion();
@@ -80,7 +81,7 @@ public class ProduccionController implements Serializable {
 
     public void obtenerUltimoNumeroProceso() {
 
-        produccionEJB.obtenerNumeroProceso().getNumeroProceso();
+        
     }
 
     public Produccion getProduccion() {
